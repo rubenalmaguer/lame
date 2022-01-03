@@ -1,10 +1,10 @@
 /* SETTINGS */
-UIlang = 'en';
+UIlang = 'en'; /* OR 'ko' */
 susLimit = 85;
 setting = (typeof setting == 'undefined' || setting == 'word') ? 'char' : 'word'; /* for objection similarity */
 
 /* LINKS */
-releaseRoot = 'https://cdn.jsdelivr.net/gh/dokdospanish/bookmarklets@v0.0/';
+releaseRoot = 'https://cdn.jsdelivr.net/gh/dokdospanish/lame@v0.0/';
 currentUrl = window.location.href;
 
 /* REGEX */
