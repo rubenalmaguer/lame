@@ -1,5 +1,5 @@
 /* SETTINGS */
-UIlang = 'en'; /* OR 'ko' */
+UIlang = 'en';
 susLimit = 85;
 setting = (typeof setting == 'undefined' || setting == 'word') ? 'char' : 'word'; /* for objection similarity */
 
@@ -30,7 +30,11 @@ else if (
   || rxTranslatorsTo.test(currentUrl)
   ) { injectRemoteScript(`${releaseRoot}mt-similarity.js`) }
 
-else { alert('1. Drag button to bookmarks bar.\n\n2. Use button in one of these sites:\n   - Vitamin\'s Arcade Objection\n   - Flitto\'s API demo\n   - translators.to \n   - Old Flitto Admin > crowd_tr > req_tr') }
+else if (  rxLameSite.test(currentUrl)
+  ) { alert('1. Drag button to bookmarks bar.\n\n2. Use button in one of these sites:\n   - Vitamin\'s Arcade Objection\n   - Flitto\'s API demo\n   - translators.to \n   - Old Flitto Admin > crowd_tr > req_tr') }
+
+
+
 
 /* HELPER */
 function injectRemoteScript(src) {
