@@ -1,7 +1,4 @@
-/*Simi V1.0*/
-
-/*SETTINGS*/
-susLimit = 85;
+/*Simi V1.1 (Moved susLimit setting to caller button)*/
 
 /*Global variables*/
 site = '', sourceWrapper = '', jab = '', providers = [],
