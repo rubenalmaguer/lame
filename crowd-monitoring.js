@@ -1,13 +1,7 @@
-/* 0.3 (
-  - Removed injectRemoteScript as it will be used by bookmark to call CDN
-  - Checkbox labels no longer translates [only 2 UI lang instead, as prferred by linguists]
-  - ck buttons= +"consistency" , - "guidelines" [as they don't exist])
-  - Added counter for "revisions in page"
-  - Added Edit option to highlighted spans
-) */
+/* 0.4 */
 
 /* Settings */
-UIlang = 'ko';
+/* UIlang = 'ko'; Language set at upper level */ 
 supportLang = ['ko', 'en'];
 errTypes = {
   ckTypo: ['오타', 'typo'],
@@ -30,7 +24,6 @@ suggestion = ['TIP', 'suggestion'];
 let selection;
 let selectedRange; /* different methods */
 let meta = {reviewer: document.querySelector('.nav>li>a').innerText.split('Hi, ')[1]};
-let revCounter = 0;
 
 /* Copy all button */
 let xlBtn = document.querySelector('[ng-click="func.getXlsx()"]');
@@ -41,15 +34,7 @@ copyAllBtn.style.marginLeft = '5px';
 copyAllBtn.innerText = '⚡ Copy Revisions ⚡';
 copyAllBtn.setAttribute('onclick','copyAllRevs(event)');
 
-/* Counter display */
-let countSpan = document.createElement('span');
-copyAllBtn.insertAdjacentElement('afterEnd', countSpan);
-countSpan.style.marginLeft = '5px';
-countSpan.style.fontWeight = 'bold';
-countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
-
 function copyAllRevs(e) {
-  console.log(revCounter);
   let allRevs = [...document.querySelectorAll('[data-grade]')];
   if (allRevs.length == 0) {
     showToast('🚫 Nothing to copy 🚫', 1000, e.clientX - 40, e.clientY - 40, 'maroon');
@@ -69,7 +54,7 @@ function copyAllRevs(e) {
       let messages = ['Great!', 'Great job!', 'Excellent.', 'A translation of the utmost quality.', 'Excellet work', 'Excellent translation.', 'Very good.', 'Outstanding translation.', 'Exactly right.', 'Excellent!', 'A job well done.', 'Exceptional translation.', 'Wonderful!', 'Outstanding!', 'Way to go!', 'Simply superb.', 'Stupendous!', 'First class job.', 'First class work.', 'Right on!', 'I’m impressed!', 'Very well done.', 'Nicely done.', 'Pretty good job.', `Couldn't ask for a better Translation.`, 'Very nice job.', 'Really good work.', 'Really good job.', 'It’s perfect!', 'Well done!', 'What a neat work!', 'That’s the right way to do it.'];
       summary = messages[messages.length * Math.random() | 0];
     } else if (rev.getAttribute('data-grade') == 0 ) {
-      g = 'So so';
+      g = 'So So';
       summary = '특이사항 없음.';
     } else {
       g = 'Bad';
@@ -117,8 +102,7 @@ jab += `
 <div id="btnWrap">
   <button id="deleteAllBtn" type="button" class="btn btn-secondary" style="color:black;" onclick="deleteAllAnnotations()">Reset</button>
   <button id="deleteBtn" type="button" class="btn btn-secondary" style="color:black;" onclick="deleteThisAnnotation()">Remove</button>
-  <button id="editBtn" type="button" class="btn btn-warning" onclick="editAnnotation()">Edit</button>
-  <button id="applyBtn" type="button" class="btn btn-primary" onclick="applyAnnotation()">Add</button>
+  <button id="applyBtn" type="button" class="btn btn-primary" onclick="applyAnnotation()">Apply</button>
 </div>
 </section>
 <section id="stateReset">
@@ -168,15 +152,9 @@ let styles = `
       flex: 1 0 100%;
       gap: 10px;
     }
-      #badBtn, #sosoBtn, #goodBtn {
+      #badBtn, #sosoBtn, #goodBtn, #deleteBtn, #deleteAllBtn, #applyBtn {
         margin-left: auto; /* aligns right*/
         flex: 0 0 30%;
-        align-self: right;
-      }
-
-      #deleteBtn, #deleteAllBtn, #applyBtn { /* Notice editBtn is missing */
-        margin-left: auto; /* aligns right*/
-        flex: 0 0 25%;
         align-self: right;
       }
 
@@ -321,11 +299,6 @@ function bringExistingRevs(){
       } else if (data[0].grade >0) {
         res.style.background = 'palegreen';
       }
-
-      /* count */
-      revCounter += 1;
-      countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
-
     })
     .catch(e => {
       console.log(`bah ${e}`);
@@ -469,23 +442,18 @@ function showAnnotator(e) {
       /* translateCK(); */
   }
 
-  /* Show apply button? */
-  if(selectedRange.toString() == selection.focusNode.textContent) {
-    applyBtn.style.visibility = 'hidden';
-  } else {
-    applyBtn.style.visibility = 'visible';
-  }
-
-  /* Show reset, delete, edit buttons? */
+  /* Show delete button ? */
   if (selection.focusNode.className === 'highlighted') {
     deleteBtn.style.visibility = 'visible';
-    editBtn.style.visibility = 'visible';
-    deleteAllBtn.style.visibility = 'hidden';
   } else {
     deleteBtn.style.visibility = 'hidden';
-    editBtn.style.visibility = 'hidden';
-    /* Show delete All button ? */
-    deleteAllBtn.style.visibility = (meta.elemRS.querySelector('.highlighted')) ? 'visible' : 'hidden';
+  }
+
+  /* Show delete All button ? */
+  if (meta.elemRS.querySelector('.highlighted')) {
+    deleteAllBtn.style.visibility = 'visible';
+  } else {
+    deleteAllBtn.style.visibility = 'hidden';
   }
 
   /* Show */
@@ -578,8 +546,6 @@ function gradeTranslation(points) {
   insertSB(points).then(() => {
     meta.elemRS.dataset['grade'] = points;
     meta.elemRS.style.background = color;
-    revCounter += 1;
-    countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
   });
 
   resetAnnotator();
@@ -605,43 +571,12 @@ function applyAnnotation() {
       insertSB(points, true).then(() => {
         meta.elemRS.dataset['grade'] = points;
         meta.elemRS.style.background ='lightpink';
-        revCounter += 1;
-        countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
       }); /* Add catch */
   } else {
     /* (NOT 1st time -> Update) */
     updateSB();
   }
   resetAnnotator();
-}
-
-function editAnnotation() {
-  let thisAnno = selectedRange.commonAncestorContainer;
-
-  /* Get ERRATA and add to HL data attribute */
-  let chosenErrata = [];
-  for (const [key, value] of Object.entries(errTypes)) {
-    let ck = document.getElementById(key);
-    if (ck.checked) {chosenErrata.push(value[UIlangIndex])}
-  }
-
-  /* Get MEMO and add to HL data attribute */
-  let memo = tatorTextArea.value;
-
-  /* Update attributes */
-  thisAnno.dataset.errata = chosenErrata;
-  thisAnno.dataset.memo = memo;
-  if (chosenErrata.length > 0) {
-    memo = `<b><i>(${chosenErrata.join(', ')})</i></b> ${memo}`
-  } else {
-    memo = `<b><i>(${suggestion[UIlangIndex]})</i></b> ${memo}`
-  }
-  thisAnno.dataset.tooltip = memo;
-
-  updateSB();
-
-  resetAnnotator();
-
 }
 
 function applyHighlighter(chosenErrata, memo) {
@@ -693,11 +628,8 @@ function deleteAllAnnotations() {
     meta.elemRS.style.background ='transparent';
     meta.elemRS.removeAttribute('data-grade');
     [...meta.elemRS.querySelectorAll('.highlighted')].forEach(el => {unwrapElement(el)});
-    revCounter += -1;
-    countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`
   });
   resetAnnotator();
-
 }
 
 function resetGrade() {
@@ -705,8 +637,6 @@ function resetGrade() {
   .then (()=>{
   meta.elemRS.style.background ='transparent';
   meta.elemRS.removeAttribute('data-grade');
-  revCounter += -1;
-  countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`
   });
   resetAnnotator();
   deselect();
