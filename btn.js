@@ -1,5 +1,5 @@
 /* SETTINGS */
-UIlang = 'en'; /* OR 'ko' */
+UIlang = 'en';
 susLimit = 85;
 setting = (typeof setting == 'undefined' || setting == 'word') ? 'char' : 'word'; /* for objection similarity */
 
@@ -16,10 +16,10 @@ rxTranslatorsTo = /translators\.to/;
 rxProApplicant = /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/;
 
 /* FLOW */
-if (
-  rxCrowdMonitoring.test(currentUrl)
-  && !document.head.querySelectorAll(`[src="${releaseRoot}crowd-monitoring.js"]`).length
-  ) { injectRemoteScript(`${releaseRoot}crowd-monitoring.js`) }
+if (rxCrowdMonitoring.test(currentUrl)) {
+  if (!document.head.querySelectorAll(`[src="${releaseRoot}crowd-monitoring.js"]`).length) { injectRemoteScript(`${releaseRoot}crowd-monitoring.js`) }
+  else { translateCK() }
+}
 
 else if (
   rxObjection.test(currentUrl)
@@ -36,7 +36,7 @@ else if (  rxLameSite.test(currentUrl)
 
 
 
-/* HELPER */
+/* HELPERS */
 function injectRemoteScript(src) {
   return new Promise((resolve, reject) => {
       const script = document.createElement('script');
@@ -44,5 +44,15 @@ function injectRemoteScript(src) {
       script.addEventListener('load', resolve);
       script.addEventListener('error', e => reject(e.error));
       document.head.appendChild(script);
+  });
+}
+
+function translateCK() {
+  let labels = [...errataWrap.querySelectorAll('input')];
+  labels.forEach(ck => {
+    let ckid = ck.id;
+    /* UIlangIndex = supportLang.indexOf(meta.tCode); */
+    let la = document.getElementById(`labelfor${ckid}`);
+    la.innerText = errTypes[ckid][UIlangIndex];
   });
 }
