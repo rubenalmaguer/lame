@@ -1,6 +1,14 @@
-/* 0.4.2 (
-  - Linebreak as comment separator when copyAll
-  - edit button
+/* 0.5 (
+  - Disallow "TIP" (Show add/edit button section only if checked errata > 0) [x]
+  - Include highlighted text as part of memo, followed by arrow and user input [x]
+  - Floating/Draggable action panel [x]
+  - Don't hide on scroll (absolutely positioned tator <left/top plus scroll x/y>) [x]
+  - Centered toast [x]
+  - Add REQ ID to DB [x]
+  - Save action panel position (local storage )[ ]
+  - 8616743 → Fix bug where No buttons show below errata labels [ ]
+  - Page change / Re-search [ ]
+  - Show REQ count in jumboTron [ ]
 ) */
 
 /* global */
@@ -23,68 +31,82 @@ let selection;
 let selectedRange; /* different methods */
 let meta = {reviewer: document.querySelector('.nav>li>a').innerText.split('Hi, ')[1]};
 let revCounter = 0;
-
-/* Copy all button */
-let xlBtn = document.querySelector('[ng-click="func.getXlsx()"]');
-let copyAllBtn = document.createElement('button');
-xlBtn.insertAdjacentElement('afterEnd', copyAllBtn);
-copyAllBtn.setAttribute('class','btn btn-info btn-xs');
-copyAllBtn.style.marginLeft = '5px';
-copyAllBtn.innerText = '⚡ Copy Revisions ⚡';
-copyAllBtn.setAttribute('onclick','copyAllRevs(event)');
-
-/* Counter display */
-let countSpan = document.createElement('span');
-copyAllBtn.insertAdjacentElement('afterEnd', countSpan);
-countSpan.style.marginLeft = '5px';
-countSpan.style.fontWeight = 'bold';
-countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
+let bShowApplyBtn = false;
+let bShowEditBtn = false;
 
 function copyAllRevs(e) {
-  console.log(revCounter);
-  let allRevs = [...document.querySelectorAll('[data-grade]')];
-  if (allRevs.length == 0) {
-    showToast('🚫 Nothing to copy 🚫', 1000, e.clientX - 40, e.clientY - 40, 'maroon');
+  let appendableReqCount = 0;
+  let copiable = '';
+  let copiableAll = '';
+
+  everyRevInReq = [...document.querySelectorAll('.req_tr')];
+  everyRevInReq.forEach(req => {
+    let everyRevInReq = [...req.querySelectorAll('[data-grade]')];
+    if (everyRevInReq.length == 0) { return }
+    appendableReqCount += 1;
+
+    everyRevInReq.forEach((rev, i) => {
+      let thisTrContentElem = rev.querySelector('[data-rev-id]');
+      updateThisMeta(thisTrContentElem);
+  
+      let g;
+      let summary =`"`;
+      if (rev.getAttribute('data-grade') > 0 ) {
+        g = 'Good';
+        let messages = ['Great!', 'Great job!', 'Excellent.', 'A translation of the utmost quality.', 'Excellet work', 'Excellent translation.', 'Very good.', 'Outstanding translation.', 'Exactly right.', 'Excellent!', 'A job well done.', 'Exceptional translation.', 'Wonderful!', 'Outstanding!', 'Way to go!', 'Simply superb.', 'Stupendous!', 'First class job.', 'First class work.', 'Right on!', 'I’m impressed!', 'Very well done.', 'Nicely done.', 'Pretty good job.', `Couldn't ask for a better Translation.`, 'Very nice job.', 'Really good work.', 'Really good job.', 'It’s perfect!', 'Well done!', 'What a neat work!', 'That’s the right way to do it.'];
+        summary = messages[messages.length * Math.random() | 0];
+      } else if (rev.getAttribute('data-grade') == 0 ) {
+        g = 'SoSo';
+        summary = '특이사항 없음.';
+      } else {
+        g = 'Bad';
+        let hls = [...rev.querySelectorAll('.highlighted')];
+        hls.forEach(hl=> {
+          let errataF = hl.dataset.errata.split(',').join(', ');
+          if (!errataF) {errataF = suggestion[UIlangIndex]}
+          summary += `(${errataF}) ${hl.dataset.memo}\n`;
+        });
+        summary = summary.substring(0, summary.length - 1);
+        summary += `"`
+      }
+  
+      /* let nowDate = new Date(); */
+      /* let xlDate = `${nowDate.getFullYear()}-${nowDate.getMonth()+1}-${nowDate.getDate()}`; */
+      let reqDateStr = rev.closest('.req_tr').querySelector('.create-date').innerText.substring(9,33);
+      let csDate = new Date (reqDateStr);
+      csDate.setDate(csDate.getDate() + 7);
+      let xlDate = `${csDate.getFullYear()}-${csDate.getMonth()+1}-${csDate.getDate()}`;
+      
+      let reviewerCSstyled;
+      if (i == 0) { reviewerCSstyled = `${meta.reviewer} ${appendableReqCount}` } else { reviewerCSstyled = meta.reviewer }
+      
+
+      /* empty string for hidden columns */
+      copiable = [
+        meta.translator, 
+        `${meta.sLang}>${meta.tLang}`, xlDate, summary, 
+        '', 
+        g,
+        `https://www.flitto.com/crowd/translations/${meta.idRQ}`,
+        `${reviewerCSstyled}`
+      ];
+      copiableAll += `${copiable.join('\t')}\r\n`;
+
+      
+    });
+
+
+  });
+
+  if (appendableReqCount == 0) {
+    showToast2('🚫 Nothing to copy 🚫', 1000, e, 'maroon');
     return
   }
 
-  let copiable = '';
-  let copiableAll = '';
-  allRevs.forEach(rev => {
-    let thisTrContentElem = rev.querySelector('[data-rev-id]');
-    updateThisMeta(thisTrContentElem);
+  navigator.clipboard.writeText(copiableAll);
 
-    let g;
-    let summary =`"`;
-    if (rev.getAttribute('data-grade') > 0 ) {
-      g = 'Good';
-      let messages = ['Great!', 'Great job!', 'Excellent.', 'A translation of the utmost quality.', 'Excellet work', 'Excellent translation.', 'Very good.', 'Outstanding translation.', 'Exactly right.', 'Excellent!', 'A job well done.', 'Exceptional translation.', 'Wonderful!', 'Outstanding!', 'Way to go!', 'Simply superb.', 'Stupendous!', 'First class job.', 'First class work.', 'Right on!', 'I’m impressed!', 'Very well done.', 'Nicely done.', 'Pretty good job.', `Couldn't ask for a better Translation.`, 'Very nice job.', 'Really good work.', 'Really good job.', 'It’s perfect!', 'Well done!', 'What a neat work!', 'That’s the right way to do it.'];
-      summary = messages[messages.length * Math.random() | 0];
-    } else if (rev.getAttribute('data-grade') == 0 ) {
-      g = 'SoSo';
-      summary = '특이사항 없음.';
-    } else {
-      g = 'Bad';
-      let hls = [...rev.querySelectorAll('.highlighted')];
-      hls.forEach(hl=> {
-        let errataF = hl.dataset.errata.split(',').join(', ');
-        if (!errataF) {errataF = suggestion[UIlangIndex]}
-        summary += `(${errataF}) ${hl.dataset.memo}\n`;
-      });
-      summary = summary.substring(0, summary.length - 1);
-      summary += `"`
-    }
+  showToast2('Copied!', 1000, e, 'black');
 
-    let nowDate = new Date();
-    let xlDate = `${nowDate.getFullYear()}-${nowDate.getMonth()+1}-${nowDate.getDate()}`;
-    
-    /* empty string for hidden columns */
-    copiable = [meta.translator, `${meta.sLang}>${meta.tLang}`, xlDate, summary, '', g, `=HYPERLINK("https://www.flitto.com/crowd/translations/${meta.idRQ}", ${meta.idRQ})`];
-    copiableAll += `${copiable.join('\t')}\r\n`;
-    navigator.clipboard.writeText(copiableAll);
-
-    showToast('Copied!', 1000, e.clientX - 40, e.clientY - 40, 'black');
-  });
 }
 
 /* Annotator HMTL*/
@@ -96,12 +118,12 @@ let jab = `
   <button id="goodBtn" type="button" class="btn btn-success" onclick="gradeTranslation(1)">Good</button>
 </section>
 <section id="stateAnnotate">
-<textarea id='tatorTextArea'></textarea>
+<textarea id="tatorTextArea"></textarea>
 <div id="errataWrap">
 `;
 for (const [key, value] of Object.entries(errTypes)) {
   jab += `
-  <input class="tatorInput" id="${key}" type="checkbox" tabindex="-1">
+  <input class="tatorInput" id="${key}" type="checkbox" tabindex="-1" oninput="showApplyEditButtons()">
   <label class="tatorLabel" id="labelfor${key}" for="${key}">${value[UIlangIndex]}</label>
   `;
 }
@@ -110,8 +132,10 @@ jab += `
 <div id="btnWrap">
   <button id="deleteAllBtn" type="button" class="btn btn-secondary" style="color:black;" onclick="deleteAllAnnotations()">Reset</button>
   <button id="deleteBtn" type="button" class="btn btn-secondary" style="color:black;" onclick="deleteThisAnnotation()">Remove</button>
-  <button id="editBtn" type="button" class="btn btn-warning" onclick="editAnnotation()">Edit</button>
-  <button id="applyBtn" type="button" class="btn btn-primary" onclick="applyAnnotation()">Add</button>
+  <div id="applyEditWrap">
+    <button id="editBtn" type="button" class="btn btn-warning" onclick="editAnnotation()">Edit</button>
+    <button id="applyBtn" type="button" class="btn btn-primary" onclick="applyAnnotation()">Add</button>
+  </div>
 </div>
 </section>
 <section id="stateReset">
@@ -122,20 +146,36 @@ jab += `
 let tatorWin = document.createElement('div');
 tatorWin.setAttribute('id', 'tatorWin');
 tatorWin.innerHTML = jab;
-
 document.body.appendChild(tatorWin);
+
+/* ACTION PANEL */
+
+let jab2 = `
+<!-- CopyAll button -->
+<button id="copyAllBtn" class="btn btn-info btn-xs" onclick="copyAllRevs(event)">⚡ Copy Revisions ⚡</button>
+
+<!-- Counter display -->
+<section id="jumboTron">
+  <span id="countSpan"></span>
+</section>
+`;
+
+let actionPanel = document.createElement('div');
+actionPanel.setAttribute('id', 'actionPanel');
+actionPanel.innerHTML = jab2;
+document.body.appendChild(actionPanel);
 
 /* Annotator CSS*/
 let styles = `
 /* ANNOTATOR */
   #tatorWin {
     z-index: 1000;
-    display: flex;
+    position: absolute;
+    display: none;
     color: black;
     width: 350px;
     resize: none; /* both; */
     overflow: auto;
-    position: fixed;
     border: solid gray 3px;
     border-radius: 3px; 
     background-color: lightgray;
@@ -144,6 +184,8 @@ let styles = `
     font-size: 20px;
     font-weight: bold;
     filter: drop-shadow(0 1px 10px rgba(113,158,206,0.8));
+
+    cursor:move;
   }
     #tatorTextArea {
       width: 100%;
@@ -156,22 +198,35 @@ let styles = `
       resize: none; 
     }
     #stateInitial, #btnWrap {
+      flex: 1 0 100%;
       display: flex;
       flex-direction: row;
-      flex: 1 0 100%;
       gap: 10px;
     }
+
       #badBtn, #sosoBtn, #goodBtn {
         margin-left: auto; /* aligns right*/
         flex: 0 0 30%;
         align-self: right;
       }
 
-      #deleteBtn, #deleteAllBtn, #applyBtn { /* Notice editBtn is missing */
-        margin-left: auto; /* aligns right*/
-        flex: 0 0 25%;
-        align-self: right;
+      #deleteBtn, #deleteAllBtn {
+        flex: 1 0 25%;
+        justify-content: center;
+        /* align-self: right; */
       }
+
+      #applyEditWrap{
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 50%;
+        gap: 10px;
+      }
+        #applyBtn, #editBtn {
+          margin-left: auto; /* aligns right*/
+          flex: 1 1 20%;
+          align-self: right;
+        }
 
     #stateReset {
       display: flex;
@@ -187,6 +242,7 @@ let styles = `
 
 /*CHECK BUTTONS*/
   #errataWrap{
+    user-select: none;
     margin: 4px 0;
     display: flex;
     flex-wrap: wrap;
@@ -257,7 +313,43 @@ let styles = `
     box-shadow:0px 0px 6px 2px #6e6e6e;
     color:#fff
   }
+
+  /* ACTION PANEL*/
+  #actionPanel {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    width: 13%;
+    z-index: 999;
+    color: black;
+    resize: none; /* both; */
+    overflow: auto;
+    border: solid gray 3px;
+    border-radius: 3px; 
+    background-color: rgba(113,158,206,0.1);
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    filter: drop-shadow(0 1px 10px rgba(113,158,206,0.8));
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+
+    cursor:move;
+  }
+
+    #copyAllBtn {
+      magrin-left: 4px;
+    }
+
+    #jumboTron {
+      color: dimgray;
+      font-size: small;
+      font-weight: bold;
+    }
   `;
+
 let styleSheet = document.createElement("style");
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
@@ -266,7 +358,7 @@ document.head.appendChild(styleSheet);
 window.addEventListener('click', () => {resetAnnotator();}); /* Hide when anything clicked */
 tatorWin.addEventListener('click', e => {e.stopPropagation();}); /* Exclude from window.onclick (Don't reset when self clicked) */  
 document.addEventListener('keyup', e => { if(e.key === "Escape"){ resetAnnotator(); } });/* Hide with esc key */
-document.addEventListener('scroll', () => { resetAnnotator(); }); /* Hide on scroll */
+/* document.addEventListener('scroll', () => { resetAnnotator(); }); */ /* Hide on scroll */
 
 /* Get Supabase client */
 let supaClient = '';
@@ -317,7 +409,10 @@ function bringExistingRevs(){
 
       /* count */
       revCounter += 1;
-      countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
+      countSpan.innerText = `Reviewed SIDs: ${revCounter}`;
+
+      /* Add copy one button */
+      addMyBtn(res);
 
     })
     .catch(e => {
@@ -346,6 +441,7 @@ async function insertSB(points, opt1) {
   let anno = (typeof opt1 === 'undefined') ? null : meta.elemRV.innerHTML;
   let payload = [{
     rvid: meta.idRS,
+    rqid: meta.idRQ,
     submitted_at: meta.submissionDate,
     reviewer: meta.reviewer,
     translator: meta.translator,
@@ -425,6 +521,9 @@ function containsPartialNode(range) {
 }
 
 function showAnnotator(e) {
+  /* Re-reset */
+  resetAnnotator();
+
   /* Limit selection to one node */
   e.stopPropagation(); /* Exclude from closing on window.onclick */
   selectedRange = getSelected().getRangeAt(0); /* Support only first selected range in Firefox + access range methods */
@@ -439,6 +538,7 @@ function showAnnotator(e) {
   /* Update global meta object*/
   let thisTrContent = selectedRange.commonAncestorContainer.closest('[data-rev-id]');
   if (thisTrContent != meta.elemRV) { updateThisMeta(thisTrContent); }
+  
   /* Pre-populate */
   meta.hlText = selection.toString().trim();
   tatorTextArea.value = meta.hlText;
@@ -464,26 +564,26 @@ function showAnnotator(e) {
 
   /* Show apply button? */
   if(selectedRange.toString() == selection.focusNode.textContent) {
-    applyBtn.style.visibility = 'hidden';
+    bShowApplyBtn = false;
   } else {
-    applyBtn.style.visibility = 'visible';
+    bShowApplyBtn = true;
   }
 
   /* Show reset, delete, edit buttons? */
   if (selection.focusNode.className === 'highlighted') {
-    deleteBtn.style.visibility = 'visible';
-    editBtn.style.visibility = 'visible';
-    deleteAllBtn.style.visibility = 'hidden';
+    bShowEditBtn = true;
+    deleteBtn.style.display = 'flex';
+    deleteAllBtn.style.display = 'none';
   } else {
-    deleteBtn.style.visibility = 'hidden';
-    editBtn.style.visibility = 'hidden';
+    bShowEditBtn = false;
+    deleteBtn.style.display = 'none';
     /* Show delete All button ? */
-    deleteAllBtn.style.visibility = (meta.elemRS.querySelector('.highlighted')) ? 'visible' : 'hidden';
+    deleteAllBtn.style.display = (meta.elemRS.querySelector('.highlighted')) ? 'flex' : 'none';
   }
 
   /* Show */
-  tatorWin.style.setProperty('left', `${e.clientX}px`);
-  tatorWin.style.setProperty('top', `${e.clientY}px`);
+  tatorWin.style.setProperty('left', `${e.clientX + window.scrollX}px`);
+  tatorWin.style.setProperty('top', `${e.clientY + window.scrollY}px`);
   tatorWin.style.setProperty('display','block');
 
   /* Reposition */
@@ -522,16 +622,16 @@ function repositionIfOverflow(pxLower, pxRighter) {
 
   /* Set Y */
   if (annotatorBottom + 15 >= winHeight) {
-    tatorWin.style.setProperty('top', `${winHeight - (annotatorBottom - annotatorTop)}px`);
+    tatorWin.style.setProperty('top', `${(winHeight + window.scrollY) - (annotatorBottom - annotatorTop)}px`);
   } else {
-    tatorWin.style.setProperty('top',  `${annotatorTop + pxLower}px`);
+    tatorWin.style.setProperty('top',  `${annotatorTop + pxLower + window.scrollY}px`);
   }
 
   /* Set X */
   if (annotatorRight >= winWidth) {
-    tatorWin.style.setProperty('left', `${winWidth - (annotatorRight - annotatorLeft)}px`);
+    tatorWin.style.setProperty('left', `${(winWidth + window.scrollX) - (annotatorRight - annotatorLeft )}px`);
   } else {
-    tatorWin.style.setProperty('left',  `${annotatorLeft + pxRighter}px`);
+    tatorWin.style.setProperty('left',  `${annotatorLeft + pxRighter + window.scrollX}px`);
   }
 }
 
@@ -547,6 +647,7 @@ function expandAnnotator() {
 function resetAnnotator() {
   /* hide */
   tatorWin.style.setProperty('display','none');
+  applyBtn.style.setProperty("visibility", "hidden", "important"); editBtn.style.setProperty("visibility", "hidden", "important");
   /* uncheck boxes */
   for (let key in errTypes) {
     document.getElementById(key).checked = false;
@@ -562,9 +663,10 @@ function gradeTranslation(points) {
     meta.elemRS.dataset['grade'] = points;
     meta.elemRS.style.background = color;
     revCounter += 1;
-    countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
+    countSpan.innerText = `Reviewed SIDs: ${revCounter} `;
   });
 
+  addMyBtn(meta.elemRS);
   resetAnnotator();
 }
 
@@ -579,7 +681,7 @@ function applyAnnotation() {
   }
 
   /* Get MEMO and add to HL data attribute */
-  let memo = tatorTextArea.value;
+  let memo = `${meta.hlText} → ${tatorTextArea.value}`;
 
   applyHighlighter(chosenErrata, memo);
 
@@ -589,12 +691,13 @@ function applyAnnotation() {
         meta.elemRS.dataset['grade'] = points;
         meta.elemRS.style.background ='lightpink';
         revCounter += 1;
-        countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`;
+        countSpan.innerText = `Reviewed SIDs: ${revCounter} `;
       }); /* Add catch */
   } else {
     /* (NOT 1st time -> Update) */
     updateSB();
   }
+  addMyBtn(meta.elemRS);
   resetAnnotator();
 }
 
@@ -677,7 +780,8 @@ function deleteAllAnnotations() {
     meta.elemRS.removeAttribute('data-grade');
     [...meta.elemRS.querySelectorAll('.highlighted')].forEach(el => {unwrapElement(el)});
     revCounter += -1;
-    countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`
+    countSpan.innerText = `Reviewed SIDs: ${revCounter} `;
+    removeMyBtn(meta.elemRS);
   });
   resetAnnotator();
 
@@ -686,10 +790,11 @@ function deleteAllAnnotations() {
 function resetGrade() {
   deleteSB()
   .then (()=>{
+  removeMyBtn(meta.elemRS);
   meta.elemRS.style.background ='transparent';
   meta.elemRS.removeAttribute('data-grade');
   revCounter += -1;
-  countSpan.innerText = `Reviewed in this page: ${revCounter} SIDs`
+  countSpan.innerText = `Reviewed SIDs: ${revCounter} `
   });
   resetAnnotator();
   deselect();
@@ -711,8 +816,10 @@ function deselect() {
 }
 
 
-function showToast(msg, ms, x, y, bgColor) {
+function showToast(msg, ms, x, y, bgColor, from) {
   let t = document.createElement('div');
+  
+  let LRpos = '-200'; /*out of sight*/
 
   /* APPEAR */
   const PromiseIn = new Promise((resolve, reject) => {
@@ -723,24 +830,31 @@ function showToast(msg, ms, x, y, bgColor) {
     display: block;
     position: fixed;
     top: ${y}px;
-    left: -200px; /*out of sight*/
+    ${from}: ${LRpos}px;
     background-color: transparent;
     color: whitesmoke;
     border-radius: 5px;
     padding: 5px 10px;
-    transition: left 200ms linear, background-color 200ms linear;`);
+    transition: ${from} 200ms linear, background-color 200ms linear;`);
     document.body.appendChild(t);
 
     resolve();
   });
 
   /* IN */
-  PromiseIn.then(() => {setTimeout(() => {t.style.left = `${x}px`; t.style.backgroundColor = `${bgColor}`;}, 100);});
+  let tSize = window.getComputedStyle(t);
+  let xCalc = window.innerWidth - x - tSize.width.substring(0,tSize.width.length-2);
+
+  PromiseIn.then(() => {setTimeout(() => {
+    if (from == 'left') { t.style.left = `${x}px`; t.style.backgroundColor = bgColor }
+    if (from == 'right') { t.style.right = `${xCalc}px`; t.style.backgroundColor = bgColor }
+  }, 100);});
   
   /* OUT */
   const PromiseOut = new Promise((resolve, reject) => {
       setTimeout(() => {
-          t.style.left = '-200px';
+          if (from == 'left') { t.style.left = `${LRpos}px` }
+          if (from == 'right') { t.style.right = `${LRpos}px` }
           t.style.backgroundColor = 'transparent';
           resolve();
       }, ms);
@@ -748,4 +862,189 @@ function showToast(msg, ms, x, y, bgColor) {
 
   /* DISAPPEAR */
   PromiseOut.then(() => {setTimeout(() => {t.remove();}, 1000);});
+}
+
+function showToast2(msg, ms, e, bgColor) {
+  let t = document.createElement('div');
+  
+  let LRpos = '-200'; /*out of sight*/
+
+  /* APPEAR */
+  const PromiseIn = new Promise((resolve, reject) => {
+    t.innerText = msg;
+    t.setAttribute('style', `
+    z-index: 1000;
+    width: max-content;
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    top: ${e.clientY}px;
+    left: ${e.clientX}px;
+    background-color: transparent;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transform: translateX(-50%) translateY(-50%) scale(0);
+    transition: transform 200ms, background-color 200ms linear;`);
+    document.body.appendChild(t);
+
+    resolve();
+  });
+
+  /* IN */
+
+  PromiseIn.then(() => {setTimeout(() => {
+    t.style.transform = `translateX(-50%) translateY(-100%) scale(1)`; t.style.backgroundColor = bgColor;
+  }, 100);});
+  
+  /* OUT */
+  const PromiseOut = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        t.style.transform = `translateX(-50%) translateY(-50%) scale(0)`;
+        t.style.backgroundColor = 'transparent';
+        resolve();
+      }, ms);
+  });
+
+  /* DISAPPEAR */
+  PromiseOut.then(() => {setTimeout(() => {t.remove();}, 1000);});
+}
+
+function addMyBtn(res) {
+  if ([...res.querySelectorAll('.RA')][0]) {return}
+  let delBtn = res.querySelector('.right-side .btn-danger');
+  let newBtn = document.createElement('button');
+  newBtn.classList.add('btn'); newBtn.classList.add('btn-info'); newBtn.classList.add('btn-xs'); newBtn.classList.add('RA');
+  newBtn.setAttribute('onclick','copyThisResData(event)');
+  newBtn.innerText = '📋';
+  delBtn.parentNode.appendChild(newBtn);
+}
+
+function removeMyBtn(res) {
+  let myBtn = res.querySelector('.RA');
+  myBtn.remove();
+}
+
+function copyThisResData(e) {
+/* DOESN'T ADD REVIEWR NAME, SINCE IT'S COPIED IN ISOLATION*/
+
+  let rev = e.target.closest('[res-id]');
+  let thisTrContentElem = rev.querySelector('[data-rev-id]');
+      updateThisMeta(thisTrContentElem);
+  
+      let g;
+      let summary =`"`;
+      if (rev.getAttribute('data-grade') > 0 ) {
+        g = 'Good';
+        let messages = ['Great!', 'Great job!', 'Excellent.', 'A translation of the utmost quality.', 'Excellet work', 'Excellent translation.', 'Very good.', 'Outstanding translation.', 'Exactly right.', 'Excellent!', 'A job well done.', 'Exceptional translation.', 'Wonderful!', 'Outstanding!', 'Way to go!', 'Simply superb.', 'Stupendous!', 'First class job.', 'First class work.', 'Right on!', 'I’m impressed!', 'Very well done.', 'Nicely done.', 'Pretty good job.', `Couldn't ask for a better Translation.`, 'Very nice job.', 'Really good work.', 'Really good job.', 'It’s perfect!', 'Well done!', 'What a neat work!', 'That’s the right way to do it.'];
+        summary = messages[messages.length * Math.random() | 0];
+      } else if (rev.getAttribute('data-grade') == 0 ) {
+        g = 'SoSo';
+        summary = '특이사항 없음.';
+      } else {
+        g = 'Bad';
+        let hls = [...rev.querySelectorAll('.highlighted')];
+        hls.forEach(hl=> {
+          let errataF = hl.dataset.errata.split(',').join(', ');
+          if (!errataF) {errataF = suggestion[UIlangIndex]}
+          summary += `(${errataF}) ${hl.dataset.memo}\n`;
+        });
+        summary = summary.substring(0, summary.length - 1);
+        summary += `"`
+      }
+  
+      /* let nowDate = new Date(); */
+      /* let xlDate = `${nowDate.getFullYear()}-${nowDate.getMonth()+1}-${nowDate.getDate()}`; */
+      let reqDateStr = rev.closest('.req_tr').querySelector('.create-date').innerText.substring(9,33);
+      let csDate = new Date (reqDateStr);
+      csDate.setDate(csDate.getDate() + 7);
+      let xlDate = `${csDate.getFullYear()}-${csDate.getMonth()+1}-${csDate.getDate()}`;
+
+      /* empty string for hidden columns */
+      copiable = [
+        meta.translator, 
+        `${meta.sLang}>${meta.tLang}`, xlDate, summary, 
+        '', 
+        g,
+        `https://www.flitto.com/crowd/translations/${meta.idRQ}`,
+        meta.reviewer
+      ];
+
+      copiable = copiable.join('\t');
+    
+      navigator.clipboard.writeText(copiable);
+    
+      showToast('Copied!', 700, e.clientX - 10, e.clientY - 40, 'black', 'right');
+}
+
+function showApplyEditButtons(){
+  let inputElems = [...errataWrap.getElementsByTagName("input")];
+  count = 0;
+  for (var i=0; i<inputElems.length; i++) {
+    if (inputElems[i].type === "checkbox" && inputElems[i].checked === true) { count++ }
+  }
+  
+  if (count > 0) {
+    if (bShowEditBtn) {editBtn.style.setProperty("visibility", "visible", "important");}
+    if (bShowApplyBtn) {applyBtn.style.setProperty("visibility", "visible", "important");}
+  } else { applyBtn.style.setProperty("visibility", "hidden", "important"); editBtn.style.setProperty("visibility", "hidden", "important") }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Make the DIV element draggable: */
+let excludeFromDrag = [tatorTextArea, copyAllBtn, deleteAllBtn, deleteBtn, editBtn, applyBtn];
+dragElement(document.getElementById('actionPanel'));
+dragElement(document.getElementById('tatorWin'));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from: */
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV */
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    /* e.preventDefault(); */
+    if (excludeFromDrag.includes(e.target)) { return }
+
+    /* get the mouse cursor position at startup */
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    /* call a function whenever the cursor moves */
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    /* calculate the new cursor position */
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    /* set the element's new position */
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released */
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
