@@ -20,7 +20,7 @@ rxProApplicant = /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/;
 /* FLOW */
 if (rxCrowdMonitoring.test(currentUrl)) {
   if (!document.head.querySelectorAll(`[src="${releaseRoot}crowd-monitoring.js"]`).length) { injectRemoteScript(`${releaseRoot}crowd-monitoring.js`) }
-  else { location.reload }
+  else { location.reload() }
 }
 
 else if (
