@@ -87,7 +87,57 @@
     .parentheses {
         font-size: medium;
     }
+
+    p {
+        position: relative;
+    }
+
+    .highlighted {
+        background-color: rgba(255, 0, 255, 0.12);
+    }
+
+    .highlighted::before,
+    .highlighted::after {
+    --scale: 0;
+    --arrow-size: 10px;
+    --tooltip-color: #333;
+
+    position: absolute;
+    top: -.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+    }
+
+    .highlighted::before {
+    --translate-y: calc(-100% - var(--arrow-size));
+
+    content: attr(data-tooltip);
+    color: white;
+    padding: .5rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    background: var(--tooltip-color);
+    }
+
+    .highlighted:hover::before,
+    .highlighted:hover::after {
+    --scale: 1;
+    }
+
+    .highlighted::after {
+    --translate-y: calc(-1 * var(--arrow-size));
+
+    content: '';
+    border: var(--arrow-size) solid transparent;
+    border-top-color: var(--tooltip-color);
+    transform-origin: top center;
+    }
     
+
 </style>
 </head>
 
@@ -130,9 +180,11 @@
             <br>
             <p><span class="step">2.</span> Grade translations.</p>
             <br>
-            <p><span class="step">3.</span> Click ⚡ Copy Revisions ⚡.</p>
+            <p><span class="step">3.</span> If graded "bad," hover on <span class="highlighted" data-tooltip="Hi, there!">highlighted</span> text to see your comment.</p>
             <br>
-            <p><span class="step">3.</span> Paste on <a href="https://docs.google.com/spreadsheets/d/1J5kl6hSgFGoe0HK1h9oYWET8l6U_1VObfQ0nLze0LCg/edit#gid=801751771">Google Sheets</a> <span class="parentheses">(Reviewer's name might take a while to update)</span>.</p>
+            <p><span class="step">4.</span> Click ⚡ Copy Revisions ⚡.</p>
+            <br>
+            <p><span class="step">5.</span> Paste on <a href="https://docs.google.com/spreadsheets/d/1J5kl6hSgFGoe0HK1h9oYWET8l6U_1VObfQ0nLze0LCg/edit#gid=801751771">Google Sheets</a> <span class="parentheses">(Reviewer's name might take a while to update)</span>.</p>
             
             <h2 class="top-line">Usage for Objections</h2>
             <br>
