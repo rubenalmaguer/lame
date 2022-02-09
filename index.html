@@ -33,23 +33,30 @@
             hyphens: manual;
         }
 
+        .top-line {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: solid black 1px;
+        }
 
     .wrapper {
-        padding-top: 6rem;
+        padding-top: 4rem;
 
         background: rgb(253,253,253);
-        background: linear-gradient(0deg, rgba(253,253,253,1) 50%, rgba(245,245,245,1) 100%);
+        background: linear-gradient(0deg, rgb(255, 255, 255) 50%, rgba(245,245,245,1) 100%);
+
+        height:90vh;
 
         display:flex;
         flex-direction: row;
-        align-items:center;
+        align-items:start;
         justify-content: space-evenly;
     }
     .column {   
         display:flex;
         flex-direction:column;
         align-items:center;
-        justify-content:center;
+        /* justify-content:center; */
     }
 
     p {
@@ -77,6 +84,9 @@
         color: aquamarine;
     }
 
+    .parentheses {
+        font-size: medium;
+    }
     
 </style>
 </head>
@@ -88,19 +98,56 @@
     </div>
 
     <div class="wrapper">
-        <div class="column left">
+<!--         <div class="column left">
             <p><span class="step">1.</span> Korean version</p>
             <a class="link-btn" href="javascript:
             releaseTag%20%3D%20%27v0.1%27%3B%0A%0A%2F%2A%20SETTINGS%20%2A%2F%0AUIlang%20%3D%20%27en%27%3B%0AsusLimit%20%3D%2085%3B%0Asetting%20%3D%20%28typeof%20setting%20%3D%3D%20%27undefined%27%20%7C%7C%20setting%20%3D%3D%20%27word%27%29%20%3F%20%27char%27%20%3A%20%27word%27%3B%20%2F%2A%20for%20objection%20similarity%20%2A%2F%0A%0A%2F%2A%20LINKS%20%2A%2F%0AreleaseRoot%20%3D%20%60https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fdokdospanish%2Flame%40%24%7BreleaseTag%7D%2F%60%3B%0AcurrentUrl%20%3D%20window.location.href%3B%0A%0A%2F%2A%20REGEX%20%2A%2F%0ArxLameSite%20%3D%20%2Flame%5C.netlify%5C.app%2F%3B%0ArxCrowdMonitoring%20%3D%20%2Fa%5C.flit%5C.to%3A4435%5C%2Fadmin%23%5C%2Fadmin%5C%2Freq_tr%2F%3B%0ArxObjection%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Farcade%5C%2Farcade-objection%2F%3B%0ArxFlittoApi%20%3D%20%2Fapi-demo%5C.flit%5C.to%2F%3B%0ArxTranslatorsTo%20%3D%20%2Ftranslators%5C.to%2F%3B%0ArxProApplicant%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Fpro-tr%5C%2Fpro-applicant%5C%2F%5Cd%2F%3B%0A%0A%2F%2A%20FLOW%20%2A%2F%0Aif%20%28rxCrowdMonitoring.test%28currentUrl%29%29%20%7B%0A%20%20if%20%28%21document.head.querySelectorAll%28%60%5Bsrc%3D%22%24%7BreleaseRoot%7Dcrowd-monitoring.js%22%5D%60%29.length%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dcrowd-monitoring.js%60%29%20%7D%0A%20%20else%20%7B%20translateCK%28%29%20%7D%0A%7D%0A%0Aelse%20if%20%28%0A%20%20rxObjection.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dobjection-compare.js%60%29%20%7D%0A%0Aelse%20if%20%28%0A%20%20rxFlittoApi.test%28currentUrl%29%0A%20%20%7C%7C%20rxTranslatorsTo.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dmt-similarity.js%60%29%20%7D%0A%0Aelse%20if%20%28%20%20rxLameSite.test%28currentUrl%29%0A%20%20%29%20%7B%20alert%28%271.%20Drag%20button%20to%20bookmarks%20bar.%5Cn%5Cn2.%20Use%20button%20in%20one%20of%20these%20sites%3A%5Cn%20%20%20-%20Vitamin%5C%27s%20Arcade%20Objection%5Cn%20%20%20-%20Flitto%5C%27s%20API%20demo%5Cn%20%20%20-%20translators.to%20%5Cn%20%20%20-%20Old%20Flitto%20Admin%20%3E%20crowd_tr%20%3E%20req_tr%27%29%20%7D%0A%0A%0A%0A%0A%2F%2A%20HELPERS%20%2A%2F%0Afunction%20injectRemoteScript%28src%29%20%7B%0A%20%20return%20new%20Promise%28%28resolve%2C%20reject%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20const%20script%20%3D%20document.createElement%28%27script%27%29%3B%0A%20%20%20%20%20%20script.src%20%3D%20src%3B%0A%20%20%20%20%20%20script.addEventListener%28%27load%27%2C%20resolve%29%3B%0A%20%20%20%20%20%20script.addEventListener%28%27error%27%2C%20e%20%3D%3E%20reject%28e.error%29%29%3B%0A%20%20%20%20%20%20document.head.appendChild%28script%29%3B%0A%20%20%7D%29%3B%0A%7D%0A%0Afunction%20translateCK%28%29%20%7B%0A%20%20let%20labels%20%3D%20%5B...errataWrap.querySelectorAll%28%27input%27%29%5D%3B%0A%20%20labels.forEach%28ck%20%3D%3E%20%7B%0A%20%20%20%20let%20ckid%20%3D%20ck.id%3B%0A%20%20%20%20%2F%2A%20UIlangIndex%20%3D%20supportLang.indexOf%28meta.tCode%29%3B%20%2A%2F%0A%20%20%20%20let%20la%20%3D%20document.getElementById%28%60labelfor%24%7Bckid%7D%60%29%3B%0A%20%20%20%20la.innerText%20%3D%20errTypes%5Bckid%5D%5BUIlangIndex%5D%3B%0A%20%20%7D%29%3B%0A%7D
             ">
                 레임 0.1</a>
-        </div>
+        </div> -->
         <div class="column right">
-            <p><span class="step">2.</span> English version</p>
             <a class="link-btn" href="javascript:
-            releaseTag%20%3D%20%27v0.1%27%3B%0A%0A%2F%2A%20SETTINGS%20%2A%2F%0AUIlang%20%3D%20%27en%27%3B%0AsusLimit%20%3D%2085%3B%0Asetting%20%3D%20%28typeof%20setting%20%3D%3D%20%27undefined%27%20%7C%7C%20setting%20%3D%3D%20%27word%27%29%20%3F%20%27char%27%20%3A%20%27word%27%3B%20%2F%2A%20for%20objection%20similarity%20%2A%2F%0A%0A%2F%2A%20LINKS%20%2A%2F%0AreleaseRoot%20%3D%20%60https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fdokdospanish%2Flame%40%24%7BreleaseTag%7D%2F%60%3B%0AcurrentUrl%20%3D%20window.location.href%3B%0A%0A%2F%2A%20REGEX%20%2A%2F%0ArxLameSite%20%3D%20%2Flame%5C.netlify%5C.app%2F%3B%0ArxCrowdMonitoring%20%3D%20%2Fa%5C.flit%5C.to%3A4435%5C%2Fadmin%23%5C%2Fadmin%5C%2Freq_tr%2F%3B%0ArxObjection%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Farcade%5C%2Farcade-objection%2F%3B%0ArxFlittoApi%20%3D%20%2Fapi-demo%5C.flit%5C.to%2F%3B%0ArxTranslatorsTo%20%3D%20%2Ftranslators%5C.to%2F%3B%0ArxProApplicant%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Fpro-tr%5C%2Fpro-applicant%5C%2F%5Cd%2F%3B%0A%0A%2F%2A%20FLOW%20%2A%2F%0Aif%20%28rxCrowdMonitoring.test%28currentUrl%29%29%20%7B%0A%20%20if%20%28%21document.head.querySelectorAll%28%60%5Bsrc%3D%22%24%7BreleaseRoot%7Dcrowd-monitoring.js%22%5D%60%29.length%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dcrowd-monitoring.js%60%29%20%7D%0A%20%20else%20%7B%20translateCK%28%29%20%7D%0A%7D%0A%0Aelse%20if%20%28%0A%20%20rxObjection.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dobjection-compare.js%60%29%20%7D%0A%0Aelse%20if%20%28%0A%20%20rxFlittoApi.test%28currentUrl%29%0A%20%20%7C%7C%20rxTranslatorsTo.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dmt-similarity.js%60%29%20%7D%0A%0Aelse%20if%20%28%20%20rxLameSite.test%28currentUrl%29%0A%20%20%29%20%7B%20alert%28%271.%20Drag%20button%20to%20bookmarks%20bar.%5Cn%5Cn2.%20Use%20button%20in%20one%20of%20these%20sites%3A%5Cn%20%20%20-%20Vitamin%5C%27s%20Arcade%20Objection%5Cn%20%20%20-%20Flitto%5C%27s%20API%20demo%5Cn%20%20%20-%20translators.to%20%5Cn%20%20%20-%20Old%20Flitto%20Admin%20%3E%20crowd_tr%20%3E%20req_tr%27%29%20%7D%0A%0A%0A%0A%0A%2F%2A%20HELPERS%20%2A%2F%0Afunction%20injectRemoteScript%28src%29%20%7B%0A%20%20return%20new%20Promise%28%28resolve%2C%20reject%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20const%20script%20%3D%20document.createElement%28%27script%27%29%3B%0A%20%20%20%20%20%20script.src%20%3D%20src%3B%0A%20%20%20%20%20%20script.addEventListener%28%27load%27%2C%20resolve%29%3B%0A%20%20%20%20%20%20script.addEventListener%28%27error%27%2C%20e%20%3D%3E%20reject%28e.error%29%29%3B%0A%20%20%20%20%20%20document.head.appendChild%28script%29%3B%0A%20%20%7D%29%3B%0A%7D%0A%0Afunction%20translateCK%28%29%20%7B%0A%20%20let%20labels%20%3D%20%5B...errataWrap.querySelectorAll%28%27input%27%29%5D%3B%0A%20%20labels.forEach%28ck%20%3D%3E%20%7B%0A%20%20%20%20let%20ckid%20%3D%20ck.id%3B%0A%20%20%20%20%2F%2A%20UIlangIndex%20%3D%20supportLang.indexOf%28meta.tCode%29%3B%20%2A%2F%0A%20%20%20%20let%20la%20%3D%20document.getElementById%28%60labelfor%24%7Bckid%7D%60%29%3B%0A%20%20%20%20la.innerText%20%3D%20errTypes%5Bckid%5D%5BUIlangIndex%5D%3B%0A%20%20%7D%29%3B%0A%7D
-            ">
-                LAME 0.1</a>
+            releaseTag%20%3D%20%27v1.2%27%3B%0A%0A%2F%2A%20SETTINGS%20%2A%2F%0A%2F%2A%20UIlang%20%3D%20%27en%27%3B%20%2A%2F%0AsusLimit%20%3D%2085%3B%0Asetting%20%3D%20%28typeof%20setting%20%3D%3D%20%27undefined%27%20%7C%7C%20setting%20%3D%3D%20%27word%27%29%20%3F%20%27char%27%20%3A%20%27word%27%3B%20%2F%2A%20for%20objection%20similarity%20%2A%2F%0A%0A%2F%2A%20LINKS%20%2A%2F%0AreleaseRoot%20%3D%20%60https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fdokdospanish%2Flame%40%24%7BreleaseTag%7D%2F%60%3B%0AcurrentUrl%20%3D%20window.location.href%3B%0A%0A%2F%2A%20REGEX%20%2A%2F%0ArxLameSite%20%3D%20%2Flame%5C.netlify%5C.app%2F%3B%0ArxCrowdMonitoring%20%3D%20%2Fa%5C.flit%5C.to%3A4435%5C%2Fadmin%23%5C%2Fadmin%5C%2Freq_tr%2F%3B%0ArxObjection%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Farcade%5C%2Farcade-objection%2F%3B%0ArxFlittoApi%20%3D%20%2Fapi-demo%5C.flit%5C.to%2F%3B%0ArxTranslatorsTo%20%3D%20%2Ftranslators%5C.to%2F%3B%0ArxProApplicant%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Fpro-tr%5C%2Fpro-applicant%5C%2F%5Cd%2F%3B%0A%0A%2F%2A%20FLOW%20%2A%2F%0Aif%20%28rxCrowdMonitoring.test%28currentUrl%29%29%20%7B%0A%20%20if%20%28%21document.head.querySelectorAll%28%60%5Bsrc%3D%22%24%7BreleaseRoot%7Dcrowd-monitoring.js%22%5D%60%29.length%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dcrowd-monitoring.js%60%29%20%7D%0A%20%20else%20%7B%20translateCK%28%29%20%7D%0A%7D%0A%0Aelse%20if%20%28%0A%20%20rxObjection.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dobjection-compare.js%60%29%20%7D%0A%0Aelse%20if%20%28%0A%20%20rxFlittoApi.test%28currentUrl%29%0A%20%20%7C%7C%20rxTranslatorsTo.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dmt-similarity.js%60%29%20%7D%0A%0Aelse%20if%20%28%20%20rxLameSite.test%28currentUrl%29%0A%20%20%29%20%7B%20alert%28%271.%20Drag%20button%20to%20bookmarks%20bar.%5Cn%5Cn2.%20Use%20button%20in%20one%20of%20these%20sites%3A%5Cn%20%20%20-%20Vitamin%5C%27s%20Arcade%20Objection%5Cn%20%20%20-%20Flitto%5C%27s%20API%20demo%5Cn%20%20%20-%20translators.to%20%5Cn%20%20%20-%20Old%20Flitto%20Admin%20%3E%20crowd_tr%20%3E%20req_tr%27%29%20%7D%0A%0A%0A%0A%0A%2F%2A%20HELPERS%20%2A%2F%0Afunction%20injectRemoteScript%28src%29%20%7B%0A%20%20return%20new%20Promise%28%28resolve%2C%20reject%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20const%20script%20%3D%20document.createElement%28%27script%27%29%3B%0A%20%20%20%20%20%20script.src%20%3D%20src%3B%0A%20%20%20%20%20%20script.addEventListener%28%27load%27%2C%20resolve%29%3B%0A%20%20%20%20%20%20script.addEventListener%28%27error%27%2C%20e%20%3D%3E%20reject%28e.error%29%29%3B%0A%20%20%20%20%20%20document.head.appendChild%28script%29%3B%0A%20%20%7D%29%3B%0A%7D
+            ">LAME 1.2</a>
+
+            <br>
+            <br>
+            <h2>Installation</h2>
+            <br>
+            <p><span class="step">1.</span> Drag above button to bookmarks/favorites bar.</p>
+            <br>
+            <p><span class="step">2.</span> Go to a supported page.</p>
+            <p class="parentheses">(<a href="https://a.flit.to:4435/admin#/admin/req_tr?itemsPerPage=10&currentPage=1">Monitoring,</a>
+                <a href="https://a3.flit.to/#/arcade/arcade-objection">Objections,</a>
+                <a href="https://api-demo.flit.to:2222/index.html">Flitto API,</a>
+                <a href="https://translators.to/">translators.to</a>)</p>
+            <br>
+            <p><span class="step">3.</span> Click on LAME button you just dragged.</p>
+
+            <h2 class="top-line">Usage for Monitoring</h2>
+            <br>
+            <p><span class="step">1.</span> Select text in any submission <span class="parentheses">(Target, not source)</span>.</p>
+            <br>
+            <p><span class="step">2.</span> Grade translations.</p>
+            <br>
+            <p><span class="step">3.</span> Click ⚡ Copy Revisions ⚡.</p>
+            <br>
+            <p><span class="step">3.</span> Paste on <a href="https://docs.google.com/spreadsheets/d/1J5kl6hSgFGoe0HK1h9oYWET8l6U_1VObfQ0nLze0LCg/edit#gid=801751771">Google Sheets</a> <span class="parentheses">(Reviewer's name might take a while to update)</span>.</p>
+            
+            <h2 class="top-line">Usage for Objections</h2>
+            <br>
+            <p><span class="step">1.</span> Press button again to toggle between <span style="font-family:courier new,monospace;background-color:#fff;font-weight:700">CHARAC<span style="font-family:courier new;background-color:tomato;text-decoration:line-through">H</span><span style="font-family:courier new;background-color:#98fb98">T</span>ER</span> and <span style="font-family:courier new,monospace;background-color:#fff;font-weight:700"><span style="font-family:courier new;background-color:tomato;text-decoration:line-through">WODR</span><span style="font-family:courier new;background-color:#98fb98">WORD</span></span> highlighting.</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
         </div>           
     </div>
 </body>
