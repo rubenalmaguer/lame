@@ -1,7 +1,7 @@
-releaseTag = 'v0.1';
+releaseTag = 'v1.2';
 
 /* SETTINGS */
-UIlang = 'en';
+/* UIlang = 'en'; */
 susLimit = 85;
 setting = (typeof setting == 'undefined' || setting == 'word') ? 'char' : 'word'; /* for objection similarity */
 
@@ -36,6 +36,8 @@ else if (  rxLameSite.test(currentUrl)
   ) { alert('1. Drag button to bookmarks bar.\n\n2. Use button in one of these sites:\n   - Vitamin\'s Arcade Objection\n   - Flitto\'s API demo\n   - translators.to \n   - Old Flitto Admin > crowd_tr > req_tr') }
 
 
+
+
 /* HELPERS */
 function injectRemoteScript(src) {
   return new Promise((resolve, reject) => {
@@ -44,15 +46,5 @@ function injectRemoteScript(src) {
       script.addEventListener('load', resolve);
       script.addEventListener('error', e => reject(e.error));
       document.head.appendChild(script);
-  });
-}
-
-function translateCK() {
-  let labels = [...errataWrap.querySelectorAll('input')];
-  labels.forEach(ck => {
-    let ckid = ck.id;
-    /* UIlangIndex = supportLang.indexOf(meta.tCode); */
-    let la = document.getElementById(`labelfor${ckid}`);
-    la.innerText = errTypes[ckid][UIlangIndex];
   });
 }
