@@ -1,13 +1,6 @@
 /*
-v1.2
-- Added counter via mutation observe
-- Added reloading events as "temporary" solution to page updates
-
-v1.1
-- Refactoring and redesign (individual reset buttons, closable tator, events on content wrappers for easier selection, disallow exact overlapping when highlighting, etc.)
-- Source toggle button
-- Date fix
-- Count reqs in addition to res
+v1.2.1
+- FIX multiline comment \n → \v to stay in same GS row
 */
 
 /* let */ styles = `
@@ -439,6 +432,8 @@ document.head.appendChild(styleSheet);
         attributeOldValue: true,
         attributeFilter: ['data-graded-count'],
       } );
+
+      /* sosofier.add(req); */
     
     });
 
@@ -965,6 +960,13 @@ document.head.appendChild(styleSheet);
   },
 };
 
+/* let */ /* sosofier = {
+   add(req) {
+    if ([...req.querySelectorAll('.RA')][0]) {return}
+    action-side col-xs-2
+  },
+}; */
+
 /* let */ botonera = {
   add(res) {
     if ([...res.querySelectorAll('.RA')][0]) {return}
@@ -1022,6 +1024,7 @@ document.head.appendChild(styleSheet);
         summary += `(${errataFormatted}) ${(hl.dataset.toggle == 'false') ? hl.dataset.memo : hl.textContent + ' → ' + hl.dataset.memo }\v`;
       });
       summary = summary.substring(0, summary.length - 1);
+      summary = summary.replaceAll('\n','\v');
       /* summary += `"` */};
 
     copiable = [
