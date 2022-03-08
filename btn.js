@@ -1,4 +1,4 @@
-releaseTag = 'v1.2.1';
+releaseTag = 'v1.2.2';
 
 /* SETTINGS */
 /* UIlang = 'en'; */
