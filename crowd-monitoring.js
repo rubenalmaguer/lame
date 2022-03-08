@@ -1,6 +1,8 @@
 /*
-v1.2.1
-- FIX multiline comment \n → \v to stay in same GS row
+v1.2.2
+- Fix for different selection behavior when there is a memo
+- Fix for triple click selection
+- Fix for outside-in / inside-out selection
 */
 
 /* let */ styles = `
@@ -508,25 +510,65 @@ document.head.appendChild(styleSheet);
     });
 
     window.addEventListener('click', e => {
+      let sel = getSelection(); 
+      
+      /* Case: triple click last line / Test: ReqID 11077701 */
+      if (sel.focusNode.matches && (sel.focusNode.matches('.report.ng-binding') || sel.focusNode.matches('.memo.click-pointer.ng-binding'))) {        
+        sel.extend(sel.anchorNode, sel.anchorNode.textContent.length);
+      }
+      
       const isVisible = tatorWin.style.display === 'flex';
       const isCompact = s3.style.display === 'none';
       const isExpanded = s3.style.display === 'flex';
-      const clickedContent = e.target.matches('[ng-bind-html="tr\\.tr_content | nl2brV2"]') || e.target.classList.contains('highlighted');
-      const clickedWrapper = e.target.matches('.col-md-12') || e.target.matches('.left-side');
-      const clickedTopBar = e.target.matches('[res-id]');
-
-      if (getSelection() == "" && isCompact) { tator.close(true); return }
-      if (getSelection() == "" && isExpanded) { tator.blink(); return }
-
+      const clickedOnContent = e.target.matches('[ng-bind-html="tr\\.tr_content | nl2brV2"]') || e.target.classList.contains('highlighted');
+      const clickedOnWrapper = e.target.matches('.col-md-12') || e.target.matches('.left-side');
+      const clickedOnTopBar = e.target.matches('[res-id]');
+    
+      if (sel == "" && isCompact) { tator.close(true); return }
+      if (sel == "" && isExpanded) { tator.blink(); return }   
+      
       if (!isVisible || isCompact) {
-        if (clickedContent) { tator.show(e) }
-        else if (clickedWrapper || clickedTopBar) {
+
+        if (clickedOnContent) { tator.show(e)
+
+        } else if (clickedOnTopBar) {
           let contentElem = window.getSelection().anchorNode.parentElement.closest('[ng-bind-html="tr\\.tr_content | nl2brV2"]');
-          let newFocus = (e.clientX < contentElem.getBoundingClientRect()['left'] || clickedTopBar) ? contentElem.firstChild : contentElem.lastChild;
-          let newOffset = (e.clientX < contentElem.getBoundingClientRect()['left'] || clickedTopBar) ? 0 : newFocus.textContent.length;
-          window.getSelection().extend(newFocus, newOffset); 
+          let newFocus = contentElem.firstChild;
+          let newOffset = 0;
+          sel.extend(newFocus, newOffset); 
+          tator.show(e);
+          
+        } else if (clickedOnWrapper) {
+          /* Inside → Out */
+          if (sel.anchorNode.nodeType === 3) {   /* 3 means text node */
+            console.log('IO');
+            let contentElem = sel.anchorNode.parentElement.closest('[ng-bind-html="tr\\.tr_content | nl2brV2"]');
+            if (!contentElem) {contentElem = sel.anchorNode.parentElement.querySelector('[ng-bind-html="tr\\.tr_content | nl2brV2"]');}
+
+            let newFocus = (e.clientX < contentElem.getBoundingClientRect()['left']) ? contentElem.firstChild : contentElem.lastChild;
+            let newOffset = (e.clientX < contentElem.getBoundingClientRect()['left']) ? 0 : newFocus.textContent.length;
+            sel.extend(newFocus, newOffset); 
+          }
+
+          /* Outside → In (WITH MEMO) */
+          else if (sel.anchorNode.matches('.memo.click-pointer.ng-binding')) {
+            let contentElem = sel.focusNode.parentElement.closest('[ng-bind-html="tr\\.tr_content | nl2brV2"]');
+            console.log('OI - w/memo');
+            if (!contentElem) {contentElem = sel.focusNode.parentElement.querySelector('[ng-bind-html="tr\\.tr_content | nl2brV2"]');}
+            sel.setBaseAndExtent(contentElem.lastChild,contentElem.lastChild.textContent.length,sel.focusNode,sel.focusOffset);
+          }
+          /* Outside → In (NO MEMO) */
+          else {
+            let contentElem = window.getSelection().focusNode.parentElement.closest('[ng-bind-html="tr\\.tr_content | nl2brV2"]');
+            console.log('OI - NO memo');
+            if (!contentElem) {contentElem = sel.focusNode.parentElement.querySelector('[ng-bind-html="tr\\.tr_content | nl2brV2"]');}
+            sel.setBaseAndExtent(contentElem.firstChild,0,sel.focusNode,sel.focusOffset);
+
+          }
+
           tator.show(e);
         }
+        
         else { tator.close(false) }
         return
       }
