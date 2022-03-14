@@ -1,21 +1,21 @@
-/* Compi v1.4 (
-    - Removed flow control and setting toggle [now in button]
+/* Compi v1.5 (
+    - Fix for empty "Score" row issue. (while loop + diff1 → diff0)
 ) */
+
+
 main();
 
 function main() {
     console.log('main');
     let nestedTables = [...document.querySelectorAll('tbody tbody')];
 	/* Remove existing row, to enable switching from word to char */
-    if (document.getElementById('diff1')) {
-        nestedTables.forEach (t => {
-            t.deleteRow(-1);
-        });
+    while (document.getElementById('diff0')) {
+        nestedTables.forEach (t => { t.deleteRow(-1) })    
     }
         
     let unit = setting; /* 'char'|'word' */
     	
-	/*Add events (needs reloading on in-app tab change*/
+	/*Add events (needs re-applying on in-app tab change) */
 	document.querySelector('[role="tablist"]').setAttribute('listener', 'true'); /* navBar */
 	document.querySelector('[role="tablist"]').addEventListener('click', ostinato, { once: true });
 	document.getElementsByClassName('fa-search')[0].parentNode.addEventListener('click', ostinato, { once: true }); /* searchBtn */
