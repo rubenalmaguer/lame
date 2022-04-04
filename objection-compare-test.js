@@ -2,11 +2,10 @@
     - Fix for empty "Score" row issue. (while loop + diff1 → diff0)
 ) */
 
-console.log('netlify');
 main();
 
 function main() {
-    console.log('main');
+    console.log('main-netlify');
     let nestedTables = [...document.querySelectorAll('tbody tbody')];
 	/* Remove existing row, to enable switching from word to char */
     while (document.getElementById('diff0')) {
