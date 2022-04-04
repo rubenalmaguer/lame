@@ -6,6 +6,7 @@
 main();
 
 function main() {
+    alert('Hello!');
     console.log('main');
     let nestedTables = [...document.querySelectorAll('tbody tbody')];
 	/* Remove existing row, to enable switching from word to char */
