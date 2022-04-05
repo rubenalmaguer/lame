@@ -1,4 +1,4 @@
-/*<button onclick="s = document.createElement('script');s.src='https://lame.netlify.app/df.js';document.head.appendChild(s);"style="height:5em;width:5em;border-radius:50%;border:6px #eee solid;background-color:#b00;color:#fff;"><b>CLICK<br>ME</b></button>*/
+/*<button onclick="s =document.createElement('script');s.src='https://lame.netlify.app/df.js';document.head.appendChild(s);"style="font-size:3rem;height:6em;width:6em;border-radius:50%;border:0.3em #eee solid;background-color:#b00;color:#fff;">CLICK ME</button>*/
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
