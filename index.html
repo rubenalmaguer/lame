@@ -23,7 +23,7 @@
   } @media only screen and (max-width:800px) {
   html { font-size: 0.85rem; }
   }
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 600px) {
     html { font-size: 0.7rem; }
   }
 
@@ -167,13 +167,19 @@
   /* border: 2px solid black; */
   font-size: 3em;
 } @media only screen and (max-width: 800px) {
-    .spot-in-gallery { flex-direction: column; }
+    .spot-in-gallery {
+      flex-direction: column;
+      gap: 5rem;
+    }
   }
 
   .spot-in-gallery:last-child {
     margin-bottom: 15rem;
   }
 
+  img {
+    box-shadow: .5rem .5rem .3rem #ccc;
+  }
   .img-description {
     width: 450px;
   }
