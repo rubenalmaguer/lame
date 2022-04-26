@@ -1,26 +1,28 @@
-/*Simi V1.1 (Moved susLimit setting to caller button)*/
-
 /*Global variables*/
+susLimit = 85;
 site = '', sourceWrapper = '', jab = '', providers = [],
 score = 0, sum = 0, avgScore = 0, highest = 0;
 
-/*Control flow based on url*/
- currentUrl = window.location.href;
- regex1 = /api-demo\.flit\.to/,
-    regex2 = /translators\.to/,
-    regex3 = /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/;
-if (regex1.test(currentUrl)) {
-    site = 'flitto';
-    providers = ['flitto','google','papago','kakao'];
-    render();
-} else if (regex2.test(currentUrl)) {
-    site = 'transto';
-    providers = ['googleNmt','papago','kakao', 'azure', 'watson', 'yandex', 'systran', 'baidu', 'youdao', 'sogou', 'tencent', 'alibaba'];
-    render();
-} else {
-    if (window.confirm(`Go to Flitto's API demo?`)) {
-        window.location.href='https://api-demo.flit.to:2222/index.html';
-    };
+
+function lameify() {
+  /*Control flow based on url*/
+   currentUrl = window.location.href;
+   regex1 = /api-demo\.flit\.to/,
+      regex2 = /translators\.to/,
+      regex3 = /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/;
+  if (regex1.test(currentUrl)) {
+      site = 'flitto';
+      providers = ['flitto','google','papago','kakao'];
+      render();
+  } else if (regex2.test(currentUrl)) {
+      site = 'transto';
+      providers = ['googleNmt','papago','kakao', 'azure', 'watson', 'yandex', 'systran', 'baidu', 'youdao', 'sogou', 'tencent', 'alibaba'];
+      render();
+  } else {
+      if (window.confirm(`Go to Flitto's API demo?`)) {
+          window.location.href='https://api-demo.flit.to:2222/index.html';
+      };
+  }
 }
 
 /*RENDER*/
