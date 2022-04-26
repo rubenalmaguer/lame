@@ -8,6 +8,7 @@ LAME_SUPPORTED_SITES = [
   {rx: /api-demo\.flit\.to/, scriptSrc: `${LAME_CDN}extend-simi-sites.js`},
   {rx: /translators\.to/, scriptSrc: `${LAME_CDN}extend-simi-sites.js`},
   {rx: /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/, scriptSrc: `${LAME_CDN}pro-applicant.js`},
+  {rx: /desertfox\.io.+post/, scriptSrc: `${LAME_CDN}df-multirequest.js`},
 ];
 
 matchedScript = '';
