@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LAME Tools</title>
     <link rel="icon" type="image/png" href="lame.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
   
@@ -166,7 +167,7 @@
   align-items: start;
   /* border: 2px solid black; */
   font-size: 3em;
-} @media only screen and (max-width: 800px) {
+} @media only screen and (max-width: 850px) {
     .spot-in-gallery {
       flex-direction: column;
       gap: 5rem;
@@ -205,8 +206,8 @@
 
     <div id="button-div">
       <a class="link-btn" href="javascript:
-        releaseTag%20%3D%20%27v1.2.3%27%3B%0A%0A%2F%2A%20SETTINGS%20%2A%2F%0A%2F%2A%20UIlang%20%3D%20%27en%27%3B%20%2A%2F%0AsusLimit%20%3D%2085%3B%0Asetting%20%3D%20%28typeof%20setting%20%3D%3D%20%27undefined%27%20%7C%7C%20setting%20%3D%3D%20%27word%27%29%20%3F%20%27char%27%20%3A%20%27word%27%3B%20%2F%2A%20for%20objection%20similarity%20%2A%2F%0A%0A%2F%2A%20LINKS%20%2A%2F%0AreleaseRoot%20%3D%20%60https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Fdokdospanish%2Flame%40%24%7BreleaseTag%7D%2F%60%3B%0AcurrentUrl%20%3D%20window.location.href%3B%0A%0A%2F%2A%20REGEX%20%2A%2F%0ArxLameSite%20%3D%20%2Flame%5C.netlify%5C.app%2F%3B%0ArxCrowdMonitoring%20%3D%20%2Fa%5C.flit%5C.to%3A4435%5C%2Fadmin%23%5C%2Fadmin%5C%2Freq_tr%2F%3B%0ArxObjection%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Farcade%5C%2Farcade-objection%2F%3B%0ArxFlittoApi%20%3D%20%2Fapi-demo%5C.flit%5C.to%2F%3B%0ArxTranslatorsTo%20%3D%20%2Ftranslators%5C.to%2F%3B%0ArxProApplicant%20%3D%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Fpro-tr%5C%2Fpro-applicant%5C%2F%5Cd%2F%3B%0A%0A%2F%2A%20FLOW%20%2A%2F%0Aif%20%28rxCrowdMonitoring.test%28currentUrl%29%29%20%7B%0A%20%20if%20%28%21document.head.querySelectorAll%28%60%5Bsrc%3D%22%24%7BreleaseRoot%7Dcrowd-monitoring.js%22%5D%60%29.length%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dcrowd-monitoring.js%60%29%20%7D%0A%20%20else%20%7B%20location.reload%28%29%20%7D%0A%7D%0A%0Aelse%20if%20%28%0A%20%20rxObjection.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dobjection-compare.js%60%29%20%7D%0A%0Aelse%20if%20%28%0A%20%20rxFlittoApi.test%28currentUrl%29%0A%20%20%7C%7C%20rxTranslatorsTo.test%28currentUrl%29%0A%20%20%29%20%7B%20injectRemoteScript%28%60%24%7BreleaseRoot%7Dmt-similarity.js%60%29%20%7D%0A%0Aelse%20if%20%28%20%20rxLameSite.test%28currentUrl%29%0A%20%20%29%20%7B%20alert%28%271.%20Drag%20button%20to%20bookmarks%20bar.%5Cn%5Cn2.%20Use%20button%20in%20one%20of%20these%20sites%3A%5Cn%20%20%20-%20Vitamin%5C%27s%20Arcade%20Objection%5Cn%20%20%20-%20Flitto%5C%27s%20API%20demo%5Cn%20%20%20-%20translators.to%20%5Cn%20%20%20-%20Old%20Flitto%20Admin%20%3E%20crowd_tr%20%3E%20req_tr%27%29%20%7D%0A%0A%0A%0A%0A%2F%2A%20HELPERS%20%2A%2F%0Afunction%20injectRemoteScript%28src%29%20%7B%0A%20%20return%20new%20Promise%28%28resolve%2C%20reject%29%20%3D%3E%20%7B%0A%20%20%20%20%20%20const%20script%20%3D%20document.createElement%28%27script%27%29%3B%0A%20%20%20%20%20%20script.src%20%3D%20src%3B%0A%20%20%20%20%20%20script.addEventListener%28%27load%27%2C%20resolve%29%3B%0A%20%20%20%20%20%20script.addEventListener%28%27error%27%2C%20e%20%3D%3E%20reject%28e.error%29%29%3B%0A%20%20%20%20%20%20document.head.appendChild%28script%29%3B%0A%20%20%7D%29%3B%0A%7D
-      ">LAME 1.2.3</a>
+        LAME_CDN%20%3D%20%60https%3A%2F%2Flamer.netlify.com%2F%60%3B%20%2F%2A%20%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%20LAMER%2FLAME%20%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%21%20%2A%2F%0ALAME_CURRENT_URL%20%3D%20window.location.href%3B%0ALAME_SUPPORTED_SITES%20%3D%20%5B%0A%20%20%7Brx%3A%20%2Flame%5C.netlify%5C.app%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Dproject-page.js%60%7D%2C%0A%20%20%7Brx%3A%20%2Fa%5C.flit%5C.to%3A4435%5C%2Fadmin%23%5C%2Fadmin%5C%2Freq_tr%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Dcrowd-monitoring.js%60%7D%2C%0A%20%20%7Brx%3A%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Farcade%5C%2Farcade-objection%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Darcade-objection.js%60%7D%2C%0A%20%20%7Brx%3A%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Farcade%5C%2Farcade-user-history%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Darcade-history.js%60%7D%2C%0A%20%20%7Brx%3A%20%2Fapi-demo%5C.flit%5C.to%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Dextend-simi-sites.js%60%7D%2C%0A%20%20%7Brx%3A%20%2Ftranslators%5C.to%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Dextend-simi-sites.js%60%7D%2C%0A%20%20%7Brx%3A%20%2Fa3%5C.flit%5C.to%5C%2F%23%5C%2Fpro-tr%5C%2Fpro-applicant%5C%2F%5Cd%2F%2C%20scriptSrc%3A%20%60%24%7BLAME_CDN%7Dpro-applicant.js%60%7D%2C%0A%5D%3B%0A%0AmatchedScript%20%3D%20%27%27%3B%0Afor%20%28let%20%7Brx%2C%20scriptSrc%7D%20of%20LAME_SUPPORTED_SITES%29%20%7B%0A%20%20if%20%28rx.test%28LAME_CURRENT_URL%29%29%20%7B%20matchedScript%20%3D%20scriptSrc%20%7D%0A%7D%0A%0Aif%20%28matchedScript%29%20%7B%0A%20%20if%20%28%21document.head.querySelectorAll%28%60%5Bsrc%3D%22%24%7BmatchedScript%7D%22%5D%60%29.length%29%20%7B%0A%20%20%20%20injectRemoteScript%28matchedScript%29.then%28%28%29%3D%3E%20%7B%20lameify%28%29%20%7D%29%0A%20%20%7D%0A%20%20else%20%7B%0A%20%20%20%20lameify%28%29%0A%20%20%7D%0A%7D%0A%0Afunction%20injectRemoteScript%28src%29%20%7B%0A%20%20return%20new%20Promise%28%28resolve%2C%20reject%29%20%3D%3E%20%7B%0A%20%20%20%20let%20script%20%3D%20document.createElement%28%27script%27%29%3B%0A%20%20%20%20script.src%20%3D%20src%3B%0A%20%20%20%20script.onload%20%3D%20%28%29%20%3D%3E%20resolve%28%2F%2A%20script%20%2A%2F%29%3B%0A%20%20%20%20script.onerror%20%3D%20%28%29%20%3D%3E%20reject%28new%20Error%28%60Script%20load%20error%20for%20%24%7Bsrc%7D%60%29%29%3B%0A%20%20%20%20document.head.append%28script%29%3B%0A%20%20%7D%29%3B%0A%7D%0A
+      ">LAME 2.0</a>
       <p><b>Installation:</b> Drag button to your bookmarks bar</p>
     </div>
     
@@ -223,18 +224,26 @@
       <div class="spot-in-gallery">
           <img width="400" src="img/crowdsourcing.jpg"></img>
         <div class="img-description">
-          <h4>Crowdsourcing Monitoring</h4>
+          <h4>Crowdsourcing Monitoring
+            <a href="https://a.flit.to:4435/admin#/admin/req_tr" target="_blank">
+              <i class="fas fa-external-link-alt fa-xs"></i>
+            </a>
+          </h4>
             <p>1. Select text in any submission</p>
             <p>2. Grade translations</p>
             <p>3. Click on ⚡ Copy Revisions ⚡</p>
-            <p>4. Paste on <a href="https://docs.google.com/spreadsheets/d/1J5kl6hSgFGoe0HK1h9oYWET8l6U_1VObfQ0nLze0LCg/edit#gid=801751771">Google Sheets</a></p>
+            <p>4. Paste on <a href="https://docs.google.com/spreadsheets/d/1J5kl6hSgFGoe0HK1h9oYWET8l6U_1VObfQ0nLze0LCg/edit#gid=801751771" target="_blank">Google Sheets</a></p>
         </div>
       </div>
 
       <div class="spot-in-gallery">
           <img width="400" src="img/objection.jpg"></img>
         <div class="img-description">
-          <h4>Arcade Objections</h4>
+          <h4>Arcade Objections
+            <a href="https://a3.flit.to/#/arcade/arcade-objection" target="_blank">
+              <i class="fas fa-external-link-alt fa-xs"></i>
+            </a>
+          </h4>
           <p>Press LAME button to toggle between <span style="font-family:courier new,monospace;background-color:#fff;font-weight:700">CHARAC<span style="font-family:courier new;background-color:tomato;text-decoration:line-through">H</span><span style="font-family:courier new;background-color:#98fb98">T</span>ER</span> and <span style="font-family:courier new,monospace;background-color:#fff;font-weight:700"><span style="font-family:courier new;background-color:tomato;text-decoration:line-through">WODR</span><span style="font-family:courier new;background-color:#98fb98">WORD</span></span> highlighting.</p>
         </div>
       </div>
@@ -242,11 +251,12 @@
       <div class="spot-in-gallery">
         <img width="400" src="img/pro-applicant.jpg"></img>
         <div class="img-description">
-          <h4>Pro Applicant Evaluation</h4>
-          <p>Compare the applicant's translation against four MT providers at a glance.</p>
-          <!-- <p>You can click on a provider for a more detailed examination.</p> -->
-          <br>
-          <p>COMING SOON</p>
+          <h4>Pro Applicant Evaluation
+            <a href="https://a3.flit.to/#/pro-tr/pro-applicant" target="_blank">
+              <i class="fas fa-external-link-alt fa-xs"></i>
+            </a>
+          </h4>
+          <p>Compare the applicant's translation against four MT providers.</p>
         </div>
       </div>
 
