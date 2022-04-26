@@ -43,6 +43,3 @@ function requestLiteTranslation(postId, targetLang, index) {
     .catch(err => console.error(err));
 
 }
-
-
-lameify()
