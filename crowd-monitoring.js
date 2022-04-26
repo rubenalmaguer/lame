@@ -488,6 +488,7 @@ allResInPage.forEach( (res, index) => {
 
 addEvents() {
 tatorTextArea.addEventListener('mousedown', e => { e.stopPropagation() /* Workaround to keep clickable while allowing dragging*/ });
+s0.addEventListener('mousedown', e => { e.stopPropagation() /* Workaround to keep clickable while allowing dragging*/ });
 tatorWin.addEventListener('click', e => { e.stopPropagation() }); /* Don't close when clicked) */
 document.addEventListener('keyup', e => { if(e.key === "Escape"){ tator.close(true) } });
 
