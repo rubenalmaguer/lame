@@ -1,9 +1,10 @@
-/* Compi v1.5 (
-    - Fix for empty "Score" row issue. (while loop + diff1 → diff0)
-) */
+susLimit = 85;
+setting = '';
 
-
-main();
+function lameify() {
+  setting = (typeof setting == 'undefined' || setting == 'word') ? 'char' : 'word'; /* for objection similarity */
+  main();
+}
 
 function main() {
     console.log('main');
