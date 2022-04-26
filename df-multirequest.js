@@ -8,8 +8,9 @@ function lameify() {
   let postId = path[path.length - 1];
   if (confirm(`Do you want to make ${mainPostButtonsYellowCount} ${(mainPostButtonsYellowCount > 1) ? 'requests' : 'request'}?\nLanguage code: ${userLang}`)) {
 
-    let mainPostButtonsAll = [...document.querySelectorAll('.df-post__content .df-btn--translate')]; 
-    mainPostButtonsAll.forEach( (b, i) => {
+
+    let mainPostButtonsAndImages = [...document.querySelectorAll('.df-post__content .df-btn--translate, .df-post__thumbnail')]; /* Include images, as they are counted when index is sent to Flitto Lite */
+    mainPostButtonsAndImages.forEach( (b, i) => {
       if (b.querySelector('.yellow')) {
 
         requestLiteTranslation(postId, userLang, i)
@@ -22,7 +23,7 @@ function lameify() {
 
 function requestLiteTranslation(postId, targetLang, index) {
   let payload = (index == 0) ? `{"type":"crowd","post_id":"${postId}","lang":"${targetLang}","dest":{"type":"post","title":true}}`
-  : `{"type":"crowd","post_id":"${postId}","lang":"${targetLang}","dest":{"type":"post","title":false,"content_index":${(index).toString()}}}`;
+  : `{"type":"crowd","post_id":"${postId}","lang":"${targetLang}","dest":{"type":"post","title":false,"content_index":${(index - 1).toString()}}}`; /* Minus title */
 
   const options = {
     method: 'POST',
@@ -42,3 +43,6 @@ function requestLiteTranslation(postId, targetLang, index) {
     .catch(err => console.error(err));
 
 }
+
+
+lameify()
