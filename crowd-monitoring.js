@@ -1,9 +1,6 @@
 /*
-v1.2.4
-- Bug fix: actionPAnel width → fit-content
-- Typo: Excellet → Excellent
-- No more random messages. Just: "Good translation" 
-- Bug fix: Click on annotator body before pressing bad and selection disappeared
+v1.2.5
+- Arabic arrow
 - TODO: Add errata categories: Proper nouns, style
 - TODO: Maybe: tone → consistency / style   +   proper nouns
 - TODO: "So-so all" button on each req. (not yey implemented [ctrl+F sosofier])
@@ -364,6 +361,7 @@ meta.nLang = (meta.sLangIsNative) ? meta.sLang : (meta.tLangIsNative) ? meta.tLa
 meta.gLang = (meta.tLangIsNative) ? meta.sLang : (meta.sLangIsNative) ? meta.tLang : null;
 meta.sCode = this.getLangCodeFromName(meta.sLang);
 meta.tCode = this.getLangCodeFromName(meta.tLang);
+meta.arrow = (meta.tCode == 'ar') ? '←' : '→';
 meta.profile = `${meta.translator}_${meta.sCode}${meta.tCode}`;
 meta.submissionDate = new Date(meta.elemRS.querySelector('.date').innerText.split(' (')[0]).toISOString();
 },
@@ -716,7 +714,7 @@ let jab = `
 </section>
 
 <section id="s3" class="memoContainer" data-mode="add">
-<div> <textarea id="srcArea" spellcheck="false" disabled></textarea> </div>
+<div> <textarea id="srcArea" spellcheck="false" dir="auto" disabled></textarea> </div>
 <div> <textarea id="tatorTextArea" lang="es" dir="auto"></textarea> </div>
 <div id="errataWrap">`;    
 let langIndex = (errata.currLangIndex < errata.supportLang.length) ? errata.currLangIndex : 0;
@@ -809,7 +807,7 @@ if (s3.dataset['mode'] === 'edit') {
 /* BOTH Edit / Add */
 meta.hlText = getSelection().toString().trim();
 let noBreakSr = meta.hlText.replace('\n',' ');
-let croppedSrc = (noBreakSr.length > 20) ? `${noBreakSr.substring(0,20)}...  →` : `${noBreakSr}  →`; 
+let croppedSrc = (noBreakSr.length > 20) ? `${noBreakSr.substring(0,20)}...  ${meta.arrow}` : `${noBreakSr}  ${meta.arrow}`;
 srcArea.textContent = croppedSrc;
 
 
@@ -1070,7 +1068,7 @@ else {
   let hls = [...res.querySelectorAll('.highlighted')];
   hls.forEach(hl=> {
     let errataFormatted = hl.dataset.errata.split(',').join(', ');
-    summary += `(${errataFormatted}) ${(hl.dataset.toggle == 'false') ? hl.dataset.memo : hl.textContent + ' → ' + hl.dataset.memo }\v`;
+    summary += `(${errataFormatted}) ${(hl.dataset.toggle == 'false') ? hl.dataset.memo : hl.textContent + ' '+ meta.arrow + ' ' + hl.dataset.memo }\v`;
   });
   summary = summary.substring(0, summary.length - 1);
   summary = summary.replaceAll('\n','\v');
