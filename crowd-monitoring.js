@@ -281,7 +281,7 @@ document.head.appendChild(styleSheet);
 
 /* let */ messages = {
 compliments: {
-0: ['Great!', 'Great job!', 'Excellent.', 'A translation of the utmost quality.', 'Excellent work', 'Excellent translation.', 'Very good.', 'Outstanding translation.', 'Exactly right.', 'Excellent!', 'A job well done.', 'Exceptional translation.', 'Wonderful!', 'Outstanding!', 'Way to go!', 'Simply superb.', 'Stupendous!', 'First class job.', 'First class work.', 'Right on!', 'I’m impressed!', 'Very well done.', 'Nicely done.', 'Pretty good job.', `Couldn't ask for a better translation.`, 'Very nice job.', 'Really good work.', 'Really good job.', 'It’s perfect!', 'Well done!', 'What a neat work!', 'That’s the right way to do it.'],
+0: ['Good translation',], /* 'Great!', 'Great job!', 'Excellent.', 'A translation of the utmost quality.', 'Excellent work', 'Excellent translation.', 'Very good.', 'Outstanding translation.', 'Exactly right.', 'Excellent!', 'A job well done.', 'Exceptional translation.', 'Wonderful!', 'Outstanding!', 'Way to go!', 'Simply superb.', 'Stupendous!', 'First class job.', 'First class work.', 'Right on!', 'I’m impressed!', 'Very well done.', 'Nicely done.', 'Pretty good job.', `Couldn't ask for a better translation.`, 'Very nice job.', 'Really good work.', 'Really good job.', 'It’s perfect!', 'Well done!', 'What a neat work!', 'That’s the right way to do it.'],*/
 1: ['좋은 번역',],
 2: ['好翻译',],
 3: ['良い翻訳',],
