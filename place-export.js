@@ -1190,7 +1190,7 @@ async function lameify() {
   /* # */ spinner.querySelector('p').innerHTML = 'Making spreadsheet...<br>(It takes a while)';
 
   function requestSheet(data) {
-    let DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxk9ag9ryIR6RN4X1muidqQ2V6578fH9SKo-CxVc5aoePuwvv87yMW2btPs6hPngBr5LA/exec';
+    let DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzNYdmTH9PlA9TrGQpuzSbI2RPcveeYlugoGJeZpIyPQmkwjftCAdFrGiuxOKeWCKzA/exec';
 
     let sData = JSON.stringify(data);
   
