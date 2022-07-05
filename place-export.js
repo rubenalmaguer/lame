@@ -1,1112 +1,3 @@
-flittoIdDictionary = [
-  {
-      "This is a spacer, so index matches lang_id": "",
-  },
-  {
-      "lang_id": 1,
-      "language": "Afrikaans",
-      "lang_org": "Afrikaans",
-      "lang_code": "af",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 2,
-      "language": "Albanian",
-      "lang_org": "gjuha shqipe",
-      "lang_code": "sq",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 3,
-      "language": "Arabic",
-      "lang_org": "العربية",
-      "lang_code": "ar",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 4,
-      "language": "Armenian",
-      "lang_org": "Հայերեն",
-      "lang_code": "hy",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 5,
-      "language": "Azerbaijani",
-      "lang_org": "azərbaycan dili",
-      "lang_code": "az",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 6,
-      "language": "Belarusian",
-      "lang_org": "беларуская мова",
-      "lang_code": "be",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 7,
-      "language": "Bengali",
-      "lang_org": "বাংলা",
-      "lang_code": "bn",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 8,
-      "language": "Bosnian",
-      "lang_org": "bosanski jezik",
-      "lang_code": "bs",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 9,
-      "language": "Bulgarian",
-      "lang_org": "български език",
-      "lang_code": "bg",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 10,
-      "language": "Catalan",
-      "lang_org": "català, valencià",
-      "lang_code": "ca",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 11,
-      "language": "Chinese (Simplified)",
-      "lang_org": "中文(简体)",
-      "lang_code": "zh-CN",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "Y",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 12,
-      "language": "Chinese (Traditional)",
-      "lang_org": "中文(繁體)",
-      "lang_code": "zh-TW",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 13,
-      "language": "Croatian",
-      "lang_org": "hrvatski jezik",
-      "lang_code": "hr",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 14,
-      "language": "Czech",
-      "lang_org": "Čeština",
-      "lang_code": "cs",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 15,
-      "language": "Danish",
-      "lang_org": "dansk",
-      "lang_code": "da",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 16,
-      "language": "Dutch",
-      "lang_org": "Nederlands",
-      "lang_code": "nl",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 17,
-      "language": "English",
-      "lang_org": "English",
-      "lang_code": "en",
-      "crowd_tr": "Y",
-      "default_yn": "Y",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "Y",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 18,
-      "language": "Estonian",
-      "lang_org": "eesti, eesti keel",
-      "lang_code": "et",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 19,
-      "language": "Finnish",
-      "lang_org": "suomi",
-      "lang_code": "fi",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 20,
-      "language": "French",
-      "lang_org": "Français",
-      "lang_code": "fr",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 21,
-      "language": "Georgian",
-      "lang_org": "ქართული",
-      "lang_code": "ka",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 22,
-      "language": "German",
-      "lang_org": "Deutsch",
-      "lang_code": "de",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 23,
-      "language": "Greek",
-      "lang_org": "ελληνικά",
-      "lang_code": "el",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 24,
-      "language": "Hebrew",
-      "lang_org": "עברית",
-      "lang_code": "he",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 25,
-      "language": "Hindi",
-      "lang_org": "हिन्दी, हिंदी",
-      "lang_code": "hi",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 26,
-      "language": "Hungarian",
-      "lang_org": "magyar",
-      "lang_code": "hu",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 27,
-      "language": "Indonesian",
-      "lang_org": "Bahasa Indonesia",
-      "lang_code": "id",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 28,
-      "language": "Icelandic",
-      "lang_org": "Íslenska",
-      "lang_code": "is",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 29,
-      "language": "Italian",
-      "lang_org": "Italiano",
-      "lang_code": "it",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 30,
-      "language": "Japanese",
-      "lang_org": "日本語",
-      "lang_code": "ja",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "Y",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 31,
-      "language": "Kazakh",
-      "lang_org": "қазақ тілі",
-      "lang_code": "kk",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 32,
-      "language": "Khmer",
-      "lang_org": "ខ្មែរ, ខេមរភាសា, ភាសាខ្មែរ",
-      "lang_code": "km",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 33,
-      "language": "Korean",
-      "lang_org": "한국어",
-      "lang_code": "ko",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "Y",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 34,
-      "language": "Lao",
-      "lang_org": "ພາສາລາວ",
-      "lang_code": "lo",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 35,
-      "language": "Lithuanian",
-      "lang_org": "lietuvių kalba",
-      "lang_code": "lt",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 36,
-      "language": "Latvian",
-      "lang_org": "latviešu valoda",
-      "lang_code": "lv",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 37,
-      "language": "Macedonian",
-      "lang_org": "македонски јазик",
-      "lang_code": "mk",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 38,
-      "language": "Malay",
-      "lang_org": "Bahasa Melayu",
-      "lang_code": "ms",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 39,
-      "language": "Maltese",
-      "lang_org": "Malti",
-      "lang_code": "mt",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 40,
-      "language": "Mongolian",
-      "lang_org": "монгол",
-      "lang_code": "mn",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 41,
-      "language": "Norwegian Bokmål",
-      "lang_org": "Norsk bokmål",
-      "lang_code": "nb",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 42,
-      "language": "Punjabi",
-      "lang_org": "ਪੰਜਾਬੀ, پنجابی‎",
-      "lang_code": "pa",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 43,
-      "language": "Persian",
-      "lang_org": "فارسی",
-      "lang_code": "fa",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 44,
-      "language": "Polish",
-      "lang_org": "Polski",
-      "lang_code": "pl",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 45,
-      "language": "Portuguese",
-      "lang_org": "Português",
-      "lang_code": "pt",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 46,
-      "language": "Romansh",
-      "lang_org": "rumantsch grischun",
-      "lang_code": "rm",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 47,
-      "language": "Romanian",
-      "lang_org": "limba română, limba moldovenească",
-      "lang_code": "ro",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 48,
-      "language": "Russian",
-      "lang_org": "Русский язык",
-      "lang_code": "ru",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 49,
-      "language": "Serbian",
-      "lang_org": "српски језик",
-      "lang_code": "sr",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 50,
-      "language": "Slovak",
-      "lang_org": "slovenčina, slovenský jazyk",
-      "lang_code": "sk",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 51,
-      "language": "Slovene",
-      "lang_org": "slovenski jezik, slovenščina",
-      "lang_code": "sl",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 52,
-      "language": "Spanish",
-      "lang_org": "Español",
-      "lang_code": "es",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "Y",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 53,
-      "language": "Swedish",
-      "lang_org": "Svenska",
-      "lang_code": "sv",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 54,
-      "language": "Tamil",
-      "lang_org": "தமிழ்",
-      "lang_code": "ta",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 55,
-      "language": "Tajik",
-      "lang_org": "тоҷикӣ, toğikī, تاجیکی‎",
-      "lang_code": "tg",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 56,
-      "language": "Thai",
-      "lang_org": "ไทย",
-      "lang_code": "th",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 57,
-      "language": "Turkish",
-      "lang_org": "Türkçe",
-      "lang_code": "tr",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 58,
-      "language": "Ukrainian",
-      "lang_org": "українська мова",
-      "lang_code": "uk",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 59,
-      "language": "Urdu",
-      "lang_org": "اردو",
-      "lang_code": "ur",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "N",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 60,
-      "language": "Uzbek",
-      "lang_org": "O'zbek, Ўзбек, أۇزبېك‎",
-      "lang_code": "uz",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 61,
-      "language": "Vietnamese",
-      "lang_org": "Tiếng Việt",
-      "lang_code": "vi",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "Y",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 62,
-      "language": "Tagalog",
-      "lang_org": "Tagalog",
-      "lang_code": "tl",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 63,
-      "language": "Swahili",
-      "lang_org": "Kiswahili",
-      "lang_code": "sw",
-      "crowd_tr": "Y",
-      "default_yn": "N",
-      "discovery": "Y",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 64,
-      "language": "English(British)",
-      "lang_org": "English(British)",
-      "lang_code": "en-GB",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "N"
-  },
-  {
-      "lang_id": 65,
-      "language": "Spanish(Latin America)",
-      "lang_org": "Español(Latinoamérica)",
-      "lang_code": "es-MX",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "N"
-  },
-  {
-      "lang_id": 66,
-      "language": "Portuguese(Brazil)",
-      "lang_org": "Português(Brasil)",
-      "lang_code": "pt-BR",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  },
-  {
-      "lang_id": 67,
-      "language": "French(Canada)",
-      "lang_org": "français(canadien)",
-      "lang_code": "fr-CA",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "N"
-  },
-  {
-      "lang_id": 68,
-      "language": "Burmese",
-      "lang_org": "Burmese",
-      "lang_code": "my-MM",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "Y",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "N",
-      "native_lang": "N"
-  },
-  {
-      "lang_id": 69,
-      "language": "Chinese (Cantonese)",
-      "lang_org": "中文(廣東話)",
-      "lang_code": "yue",
-      "crowd_tr": "N",
-      "default_yn": "N",
-      "discovery": "N",
-      "has_lang_set": "N",
-      "pro_tr": "N",
-      "pro_pf": "N",
-      "support_tr": "Y",
-      "video_tr": "N",
-      "support_arcade": "Y",
-      "native_lang": "Y"
-  }
-];
 USER_TOKEN = localStorage.getItem('access_token');
 OPTIONS_FOR_GET = {
   method: 'GET',
@@ -1116,24 +7,31 @@ OPTIONS_FOR_GET = {
 /* lameify(); */
 
 async function lameify() {
-
-  let chosenPlaceId = prompt('Input place ID to make spreadsheet.');
-  if (!chosenPlaceId) { return }
-  
-  /* # */ let spinner = appendSpinner();
-  let validIds = await fetchValidPlaceIds();
-  if (!validIds.some( id => id == chosenPlaceId)) { 
-    closeSpinner(spinner);
-    alert('Place ID is not valid'); 
-    return 
+  let chosenPlaceId;
+  while(true){
+    chosenPlaceId = prompt('Input place ID to make spreadsheet.');
+    if (!chosenPlaceId) { return }
+    if (/^\d{1,6}$/.test(chosenPlaceId)) { break }
+    if (/^\d+$/.test(chosenPlaceId)) {
+      alert('Too long.');
+    }
+    else{
+        alert('Numbers only, please.');
+    }
   }
-  
 
+  let spinner = appendSpinner();
   /* # */ spinner.querySelector('p').textContent = 'Fetching place details...';
   let placeDetails = await fetchPlaceDetails(chosenPlaceId);
 
+  if (placeDetails == -1) {
+    closeSpinner(spinner);
+    alert(`Place ${chosenPlaceId} not found.`);
+    return
+  }
 
-  /* Fetch items */
+
+  /* Fetch pages */
   let promises = [];
   let i = 0;
   for (let item of placeDetails.item) {
@@ -1145,49 +43,25 @@ async function lameify() {
 
 
   let pages = await Promise.all(promises).then(results => { return results } ).catch(error => console.log(`Error in promises ${error}`));
-  let filteredPages = pages.map(p => {
-    return {
-      pageId: p.item_id,
-      imageUrl: p.image_url,
-     
-      /*  
-      1. If segment is empty, wrap in 2d array, as required by Google Sheets
-      2. Filter out 삭제됨 items (status = 'D'), leaving only 사용 가능 (status = 'Y')
-      3. Return only the values to be set in "id", "source language", and "content" columns
-      4. Sort in ascending order by id
-      */
-      segments: (!p.item_org.length) ? [['']] : p.item_org.reduce((prev, seg) => {
-            if (seg.status != 'Y') { return prev }
-            return [...prev, [seg.item_org_id, flittoIdDictionary[seg.lang_id].language, seg.content]];
-        }, new Array)
-        .sort((a, b) => {
-            return a[0] - b[0]
-        }),
+  if (!pages.length) {
+    closeSpinner(spinner);
+    alert(`No images found for ${chosenPlaceId}`);
+    return
+  }
 
-    }
-  });
+  let activePages = pages.filter( p => p.status == 'Y');
+  if (!activePages.length) {
+    closeSpinner(spinner);
+    alert(`Place ${chosenPlaceId} has no active images`);
+    return
+  }
 
-  /* # */ spinner.querySelector('p').textContent = 'Just a little longer...';
-  /* Organize data */
-  let spelledOutLangs = placeDetails.place_lang_pair.reduce((prev, curr) => { 
-    return [...prev, flittoIdDictionary[curr.dst_lang_id].language]
-  }, []);
-  spelledOutLangs.sort();
-  
-
-  let data = {
-    placeName: placeDetails.place_info.title,
-    placeId: placeDetails.place_info.place_id,
-    mainImageUrl: placeDetails.place_image[0].image_url,
-    langs: spelledOutLangs,
-    menuPages: filteredPages,
-  };
-
-  console.log(data);
+  let simplifiedData = simplifyData(placeDetails, activePages);
+  console.log(simplifiedData);
 
   
-  requestSheet(data);
-  /* # */ spinner.querySelector('p').innerHTML = 'Making spreadsheet...<br>(It takes a while)';
+  requestSheet(simplifiedData);
+  /* # */ spinner.querySelector('p').innerHTML = 'Making spreadsheet...<br>(May take a while)';
 
   function requestSheet(data) {
     let DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzNYdmTH9PlA9TrGQpuzSbI2RPcveeYlugoGJeZpIyPQmkwjftCAdFrGiuxOKeWCKzA/exec';
@@ -1233,31 +107,16 @@ async function lameify() {
     
     try {
       let response = await fetch(url, OPTIONS_FOR_GET);
+      if (!response.ok) {
+        const message = `An error has occured: ${response.status}`;
+        throw new Error(message);
+      }
       return await response.json();
     } 
     
     catch(err) {
-      /* Catches errors both in fetch and response.json */
-      closeSpinner(spinner);
-      alert(err);
-    }
-  
-  }
-
-  async function fetchValidPlaceIds() {
-    let url = 'https://a3-prod.flit.to:1443/v2/qr-place/places?status_list=Y,N,D&offset=0&limit=99999&_method=GET';
-    
-    try {
-      let response = await fetch(url, OPTIONS_FOR_GET);
-      let json = await response.json();
-      let validIds = json.map(place => place.place_id);
-      return validIds
-    } 
-    
-    catch(err) {
-      closeSpinner(spinner);
       console.log(err);
-      alert('Something went wrong.');
+      return -1
     }
   
   }
@@ -1270,10 +129,6 @@ async function lameify() {
   }
 
 }
-
-
-
-
 
 function appendSpinner() {
   /* Make container for all spinners */
@@ -1354,3 +209,204 @@ function closeSpinner(element) {
         wrap.remove();
     }
 }
+
+
+function simplifyData(placeDetails, pages) {
+    const flittoLangs = {
+      "1": "Afrikaans(Afrikaans)",
+      "2": "Albanian(gjuha shqipe)",
+      "3": "Arabic(العربية)",
+      "4": "Armenian(Հայերեն)",
+      "5": "Azerbaijani(azərbaycan dili)",
+      "6": "Belarusian(беларуская мова)",
+      "7": "Bengali(বাংলা)",
+      "8": "Bosnian(bosanski jezik)",
+      "9": "Bulgarian(български език)",
+      "10": "Catalan(català, valencià)",
+      "11": "Chinese (Simplified)(中文(简体))",
+      "12": "Chinese (Traditional)(中文(繁體))",
+      "13": "Croatian(hrvatski jezik)",
+      "14": "Czech(Čeština)",
+      "15": "Danish(dansk)",
+      "16": "Dutch(Nederlands)",
+      "17": "English(English)",
+      "18": "Estonian(eesti, eesti keel)",
+      "19": "Finnish(suomi)",
+      "20": "French(Français)",
+      "21": "Georgian(ქართული)",
+      "22": "German(Deutsch)",
+      "23": "Greek(ελληνικά)",
+      "24": "Hebrew(עברית)",
+      "25": "Hindi(हिन्दी, हिंदी)",
+      "26": "Hungarian(magyar)",
+      "27": "Indonesian(Bahasa Indonesia)",
+      "28": "Icelandic(Íslenska)",
+      "29": "Italian(Italiano)",
+      "30": "Japanese(日本語)",
+      "31": "Kazakh(қазақ тілі)",
+      "32": "Khmer(ខ្មែរ, ខេមរភាសា, ភាសាខ្មែរ)",
+      "33": "Korean(한국어)",
+      "34": "Lao(ພາສາລາວ)",
+      "35": "Lithuanian(lietuvių kalba)",
+      "36": "Latvian(latviešu valoda)",
+      "37": "Macedonian(македонски јазик)",
+      "38": "Malay(Bahasa Melayu)",
+      "39": "Maltese(Malti)",
+      "40": "Mongolian(монгол)",
+      "41": "Norwegian Bokmål(Norsk bokmål)",
+      "42": "Punjabi(ਪੰਜਾਬੀ, پنجابی‎)",
+      "43": "Persian(فارسی)",
+      "44": "Polish(Polski)",
+      "45": "Portuguese(Português)",
+      "46": "Romansh(rumantsch grischun)",
+      "47": "Romanian(limba română, limba moldovenească)",
+      "48": "Russian(Русский язык)",
+      "49": "Serbian(српски језик)",
+      "50": "Slovak(slovenčina, slovenský jazyk)",
+      "51": "Slovene(slovenski jezik, slovenščina)",
+      "52": "Spanish(Español)",
+      "53": "Swedish(Svenska)",
+      "54": "Tamil(தமிழ்)",
+      "55": "Tajik(тоҷикӣ, toğikī, تاجیکی‎)",
+      "56": "Thai(ไทย)",
+      "57": "Turkish(Türkçe)",
+      "58": "Ukrainian(українська мова)",
+      "59": "Urdu(اردو)",
+      "60": "Uzbek(O'zbek, Ўзбек, أۇزبېك‎)",
+      "61": "Vietnamese(Tiếng Việt)",
+      "62": "Tagalog(Tagalog)",
+      "63": "Swahili(Kiswahili)",
+      "64": "English(British)(English(British))",
+      "65": "Spanish(Latin America)(Español(Latinoamérica))",
+      "66": "Portuguese(Brazil)(Português(Brasil))",
+      "67": "French(Canada)(français(canadien))",
+      "68": "Burmese(Burmese)",
+      "69": "Chinese (Cantonese)(中文(廣東話))",
+      "Afrikaans(Afrikaans)": 1,
+      "Albanian(gjuha shqipe)": 2,
+      "Arabic(العربية)": 3,
+      "Armenian(Հայերեն)": 4,
+      "Azerbaijani(azərbaycan dili)": 5,
+      "Belarusian(беларуская мова)": 6,
+      "Bengali(বাংলা)": 7,
+      "Bosnian(bosanski jezik)": 8,
+      "Bulgarian(български език)": 9,
+      "Catalan(català, valencià)": 10,
+      "Chinese (Simplified)(中文(简体))": 11,
+      "Chinese (Traditional)(中文(繁體))": 12,
+      "Croatian(hrvatski jezik)": 13,
+      "Czech(Čeština)": 14,
+      "Danish(dansk)": 15,
+      "Dutch(Nederlands)": 16,
+      "English(English)": 17,
+      "Estonian(eesti, eesti keel)": 18,
+      "Finnish(suomi)": 19,
+      "French(Français)": 20,
+      "Georgian(ქართული)": 21,
+      "German(Deutsch)": 22,
+      "Greek(ελληνικά)": 23,
+      "Hebrew(עברית)": 24,
+      "Hindi(हिन्दी, हिंदी)": 25,
+      "Hungarian(magyar)": 26,
+      "Indonesian(Bahasa Indonesia)": 27,
+      "Icelandic(Íslenska)": 28,
+      "Italian(Italiano)": 29,
+      "Japanese(日本語)": 30,
+      "Kazakh(қазақ тілі)": 31,
+      "Khmer(ខ្មែរ, ខេមរភាសា, ភាសាខ្មែរ)": 32,
+      "Korean(한국어)": 33,
+      "Lao(ພາສາລາວ)": 34,
+      "Lithuanian(lietuvių kalba)": 35,
+      "Latvian(latviešu valoda)": 36,
+      "Macedonian(македонски јазик)": 37,
+      "Malay(Bahasa Melayu)": 38,
+      "Maltese(Malti)": 39,
+      "Mongolian(монгол)": 40,
+      "Norwegian Bokmål(Norsk bokmål)": 41,
+      "Punjabi(ਪੰਜਾਬੀ, پنجابی‎)": 42,
+      "Persian(فارسی)": 43,
+      "Polish(Polski)": 44,
+      "Portuguese(Português)": 45,
+      "Romansh(rumantsch grischun)": 46,
+      "Romanian(limba română, limba moldovenească)": 47,
+      "Russian(Русский язык)": 48,
+      "Serbian(српски језик)": 49,
+      "Slovak(slovenčina, slovenský jazyk)": 50,
+      "Slovene(slovenski jezik, slovenščina)": 51,
+      "Spanish(Español)": 52,
+      "Swedish(Svenska)": 53,
+      "Tamil(தமிழ்)": 54,
+      "Tajik(тоҷикӣ, toğikī, تاجیکی‎)": 55,
+      "Thai(ไทย)": 56,
+      "Turkish(Türkçe)": 57,
+      "Ukrainian(українська мова)": 58,
+      "Urdu(اردو)": 59,
+      "Uzbek(O'zbek, Ўзбек, أۇزبېك‎)": 60,
+      "Vietnamese(Tiếng Việt)": 61,
+      "Tagalog(Tagalog)": 62,
+      "Swahili(Kiswahili)": 63,
+      "English(British)(English(British))": 64,
+      "Spanish(Latin America)(Español(Latinoamérica))": 65,
+      "Portuguese(Brazil)(Português(Brasil))": 66,
+      "French(Canada)(français(canadien))": 67,
+      "Burmese(Burmese)": 68,
+      "Chinese (Cantonese)(中文(廣東話))": 69
+    };
+  
+    let targetLangs = placeDetails.place_lang_pair.reduce((prev, curr) => { 
+      return [...prev, flittoLangs[curr.dst_lang_id]]
+    }, []);
+    targetLangs.sort();
+    
+    let sortedLangIds = targetLangs.map( lang => flittoLangs[lang] );
+  
+    let simple = {
+      placeName: placeDetails.place_info.title,
+      placeId: placeDetails.place_info.place_id,
+      mainImageUrl: placeDetails.place_image[0].image_url,
+      langs: targetLangs,
+    };
+  
+    let simplePages = pages.map(p => {
+      return {
+        pageId: p.item_id,
+        imageUrl: p.image_url,
+        segments:
+          /* 1. If segment is empty, wrap in 2d array, as required by Google Sheets */
+          (!p.item_org.length) ? [['']]
+  
+          : p.item_org.reduce((prev, seg) => {
+  
+              /* 2. Filter out 삭제됨 items (status = 'D'), leaving only 사용 가능 (status = 'Y') */
+              if (seg.status != 'Y') { return prev }
+  
+              /* 3. Get "id", "source language", and "content" columns */
+              let sourceInfo = [seg.item_org_id, flittoLangs[seg.lang_id], seg.content];
+  
+              /* 4. Get translations sorted alphabetically by target language, by looping through lang ids */
+              let sortableTranslations = seg.item_tr;
+              let sortedTranslations = sortedLangIds.reduce((prev, currLangId) => {
+                let matchingIndex = sortableTranslations.findIndex( tr => tr.lang_id == currLangId );
+                let content = (matchingIndex == -1) ? '': sortableTranslations[matchingIndex].content;
+                return [...prev, content]
+              }, new Array);
+  
+              let rowInfo = [...sourceInfo, ...sortedTranslations];
+  
+              return [...prev, rowInfo];
+  
+          }, new Array)
+  
+          /* 5. Sort in ascending order by id */
+          .sort((a, b) => {
+              return a[0] - b[0]
+          }),
+  
+      }
+    });
+  
+    simple.menuPages = simplePages;
+  
+    return simple
+  
+  }
