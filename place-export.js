@@ -3,6 +3,7 @@ OPTIONS_FOR_GET = {
   method: 'GET',
   headers: { Authorization: 'Bearer ' + USER_TOKEN, 'content-type': 'application/json' }
 };
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwIjlUrJNLXJ4xqPRPtzbghuRH4KnbFmCZ70KKO5hTiwlhgZ9y_v4FgdtscUXQQBnQRMw/exec';
 
 /* lameify(); */
 
@@ -21,12 +22,27 @@ async function lameify() {
   }
 
   let spinner = appendSpinner();
+
+  /* Fetch general info */
   /* # */ spinner.querySelector('p').textContent = 'Fetching place details...';
   let placeDetails = await fetchPlaceDetails(chosenPlaceId);
 
   if (placeDetails == -1) {
     closeSpinner(spinner);
     alert(`Place ${chosenPlaceId} not found.`);
+    return
+  }
+
+  let fullPlaceName = `${placeDetails.place_id}. ${placeDetails.place_info.title}`;
+
+
+
+  /* Check if already exists */
+  /* # */ spinner.querySelector('p').textContent = 'Checking existing files...';
+  let preExistingSheetUrl = await fetchPreExistingSheet(chosenPlaceId);
+  if (preExistingSheetUrl != -1) {
+    console.log(preExistingSheetUrl);
+    showResultPre(preExistingSheetUrl, spinner);
     return
   }
 
@@ -58,14 +74,12 @@ async function lameify() {
 
   let simplifiedData = simplifyData(placeDetails, activePages);
   console.log(simplifiedData);
-
   
   requestSheet(simplifiedData);
   /* # */ spinner.querySelector('p').innerHTML = 'Making spreadsheet...<br>(May take a while)';
 
-  function requestSheet(data) {
-    let DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzNYdmTH9PlA9TrGQpuzSbI2RPcveeYlugoGJeZpIyPQmkwjftCAdFrGiuxOKeWCKzA/exec';
 
+  function requestSheet(data) {
     let sData = JSON.stringify(data);
   
     let options = {
@@ -80,16 +94,8 @@ async function lameify() {
       return response.text();
     })
     .then(responseAsText => {
-      let url = `https://docs.google.com/spreadsheets/d/${responseAsText}`;
 
-      spinner.innerHTML = `
-      <div style="width: 100%; display: flex; justify-content: end;">
-        <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
-      </div>
-      <div style="flex-grow: 1; display: grid; place-items: center; margin-bottom: 1rem;">
-      <a href="${url}" target="_blank" style="text-decoration:underline;">${data.placeId}. ${data.placeName}</a>
-      </div>
-      `
+      showResultNew(responseAsText, spinner);
 
     })
     .catch(error => {
@@ -100,8 +106,26 @@ async function lameify() {
   }
 
 
+  async function fetchPreExistingSheet(placeId) {
+    let url = DEPLOYMENT_URL + '?' + placeId;
+
+    try {
+      let response = await fetch(url, {method: 'GET'});
+      if (!response.ok) {
+        const message = `An error has occured: ${response.status}`;
+        throw new Error(message);
+      }
+      return await response.text();
+    } 
+    
+    catch(err) {
+      console.log(err);
+      return -1
+    }
 
 
+  }
+  
   async function fetchPlaceDetails(id) {
     let url = `https://a3-prod.flit.to:1443/v2/qr-place/places/${id}?place_id=${id}&_method=GET`;
     
@@ -128,7 +152,36 @@ async function lameify() {
     return json
   }
 
+  function showResultNew(sheetId, displayElement) {
+    let newUrl = `https://docs.google.com/spreadsheets/d/${sheetId}`;
+
+    displayElement.innerHTML = `
+    <div style="width: 100%; display: flex; justify-content: end;">
+      <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
+    </div>
+    <div style="flex-grow: 1; display: grid; place-items: center; margin-bottom: 1rem;">
+    <a href="${newUrl}" target="_blank" style="text-decoration:underline;">${fullPlaceName}</a>
+    </div>
+    `
+  }
+
+  function showResultPre(preExistingSheetUrl, displayElement) {
+    displayElement.innerHTML = `
+    <div style="width: 100%; display: flex; justify-content: end;">
+      <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
+    </div>
+    <div style="flex-grow: 1; display: grid; place-items: center; margin-bottom: 1rem;">
+    <a href="${preExistingSheetUrl}" target="_blank" style="text-decoration:underline;">${fullPlaceName}</a>
+    <s style="text-decoration:none;">(기존시트)</s>
+    </div>
+    `
+  }
 }
+
+
+
+
+
 
 function appendSpinner() {
   /* Make container for all spinners */
@@ -410,3 +463,6 @@ function simplifyData(placeDetails, pages) {
     return simple
   
   }
+
+
+
