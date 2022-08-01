@@ -9,7 +9,7 @@ LAME_SUPPORTED_SITES = [
   {rx: /translators\.to/, scriptSrc: `${LAME_CDN}extend-simi-sites.js`},
   {rx: /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/, scriptSrc: `${LAME_CDN}pro-applicant.js`},
   {rx: /desertfox\.io.+post/, scriptSrc: `${LAME_CDN}df-multirequest.js`},
-  {rx: /a3\.flit\.to\/#\/menu-tr\/places/, scriptSrc: `${LAME_CDN}place-export.js`},
+  {rx: /a3\.flit\.to\/#\/menu-tr/, scriptSrc: `${LAME_CDN}place-export.js`},
 ];
 
 matchedScript = '';
