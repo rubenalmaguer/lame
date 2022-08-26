@@ -119,7 +119,14 @@ async function getVertLink(chosenPlaceId) {
     console.log(reverticalSheetUrl);
     //open(reverticalSheetUrl);
     //closeSpinner(spinner);
-    spinner.innerHTML = `<a href="${reverticalSheetUrl}" style="text-align: center">Download HB sheet<br>for Place ${chosenPlaceId} </a>`;
+    spinner.innerHTML = `
+    <div style="width: 100%; display: flex; justify-content: end;">
+      <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
+    </div>
+    <div style="flex-grow: 1; display: grid; place-items: center;">
+    <a href="${reverticalSheetUrl}" style="text-align: center; margin-bottom:1em">Download HB sheet<br>for Place ${chosenPlaceId}</a>
+    </div>
+    `;
   }
   else if (reverticalSheetUrl != -1) {
     spinner.innerHTML = `
