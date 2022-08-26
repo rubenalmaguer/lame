@@ -3,23 +3,163 @@ OPTIONS_FOR_GET = {
   method: 'GET',
   headers: { Authorization: 'Bearer ' + USER_TOKEN, 'content-type': 'application/json' }
 };
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwIjlUrJNLXJ4xqPRPtzbghuRH4KnbFmCZ70KKO5hTiwlhgZ9y_v4FgdtscUXQQBnQRMw/exec';
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
+
+
+const LameModal = {
+  style: 'margin-top: 5rem; padding: 1em 2em 2em 2em ; min-width:50ch; max-width:100ch; max-height: 80vh; border: 0; box-shadow: #000 0px 0px 1em; border-radius: 5px;',
+  template: `
+    <div style="display: flex; align-items: end; justify-content: space-between;">
+      <a href="https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX" target="_blank" tabindex="-1">
+        <i _ngcontent-rvc-c130="" class="fa fa-external-link"></i> Open HO folder
+      </a>
+      <button id="btn-close-lame-modal" type="button" class="btn btn-xs btn-secondary" style="border-radius: 50%; transform: translate(50%);">
+        <i class="fa fa-times fa-lg" style="transform: translate(0, -10%);"></i>
+      </button>
+    </div>
+    <div style="padding-top: 2em;max-height: 60vh; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5em">
+      <span>Input place IDs separated by commas</span>
+      <input id="lame-input" autocomplete="off" tabindex="1"></input>
+      
+      <div style="padding-top: 1em ;display: flex; justify-content: space-around;">
+        <button id="btn-horz" onclick="go(1)" class="btn btn-info" disabled><i _ngcontent-rvc-c130="" class="fa fa-link"></i> Horizontal (HO)</button>
+        <button id="btn-vert" onclick="go(0)" class="btn btn-primary" disabled><i _ngcontent-rvc-c130="" class="fa fa-download"></i> Vertical (HB)</button>
+      </div>
+    </div>`,
+  
+  backdropStyle: 'dialog::backdrop { background: #000; opacity: 0.5; transition: opacity .15s linear; }',
+
+  add: function() {
+    if (document.getElementById('lame-ui')) { return }
+    LameModal.dialog = Object.assign(document.createElement('dialog'), {
+      id: 'lame-ui',
+      open: '',
+      style: LameModal.style,
+      innerHTML: LameModal.template,
+      onmousedown: (e) => {
+        e.preventDefault();
+        let input = document.getElementById('lame-input');
+        if (document.activeElement != input) input.focus()
+      },
+    });
+    document.body.append(LameModal.dialog);
+  
+    const styleSheet = Object.assign(document.createElement('style'), { textContent: LameModal.backdropStyle });
+    document.head.appendChild(styleSheet);
+
+    LameModal.inputField = document.getElementById('lame-input');
+    LameModal.btnClose = document.getElementById('btn-close-lame-modal');
+    LameModal.btnHorz = document.getElementById('btn-horz');
+    LameModal.btnVert = document.getElementById('btn-vert');
+
+    LameModal.inputField.addEventListener('input', () => LameModal.validateInput());
+    LameModal.btnClose.addEventListener('click', e => LameModal.close());
+  },
+
+  validateInput: function() {
+    let val = LameModal.inputField.value;
+    //let rx = /^\d+(\s*,\s*\d+)*\s*$/ /* Digits separated by commas an optional spaces (trailing comma not allowed)*/
+    let rxMulti = /^\s*\d{1,6}(\s*,\s*\d{1,6})*\s*,?\s*$/ /* Digits separated by commas an optional spaces */
+    let rxSingle = /^\s*\d{1,6}\s*$/;
+    let isMulti = rxMulti.test(val);
+    let isSingle = rxSingle.test(val);
+    
+    LameModal.btnHorz.disabled = !isMulti;
+    LameModal.btnVert.disabled = !isMulti; //!isSingle;
+  },
+
+  close() {
+    LameModal.btnHorz.disabled = true;
+    LameModal.btnVert.disabled = true;
+    LameModal.inputField.value = '';
+    LameModal.dialog.close()
+  }
+
+
+}
 
 /* lameify(); */
 
-async function lameify() {
-  let chosenPlaceId;
-  while(true){
-    chosenPlaceId = prompt('Input place ID to make spreadsheet.');
-    if (!chosenPlaceId) { return }
-    if (/^\d{1,6}$/.test(chosenPlaceId)) { break }
-    if (/^\d+$/.test(chosenPlaceId)) {
-      alert('Too long.');
-    }
-    else{
-        alert('Numbers only, please.');
-    }
+
+function lameify() {
+  let lameDialog = document.querySelector('#lame-ui');
+  if (!lameDialog) {
+    LameModal.add();
+    lameDialog = document.querySelector('#lame-ui')
   }
+
+  if (!lameDialog?.open) {
+    LameModal.dialog.showModal();
+    document.getElementById('lame-input').focus();
+  }
+}
+
+
+function go(isHO) {
+  
+  const MAX_LENGTH = 6;
+  let inputStr = document.getElementById('lame-input').value;
+  let inputArr = inputStr.split(/\s*,\s*/).filter(item => (item));
+  let inputSet = new Set(inputArr);
+
+  LameModal.close()
+
+  let cb = (isHO) ? getHorzLink : getVertLink;
+  inputSet.forEach( id => { if (id.length <= MAX_LENGTH) cb(id) } )
+
+}
+
+
+async function getVertLink(chosenPlaceId) {
+  let spinner = appendSpinner();
+  /* # */ spinner.querySelector('p').innerHTML = `Processing place #${chosenPlaceId}<br>for download...`;
+  let reverticalSheetUrl = await fetchReverticalSheet(chosenPlaceId);
+
+  if (/^http/.test(reverticalSheetUrl)) {
+    console.log(reverticalSheetUrl);
+    //open(reverticalSheetUrl);
+    //closeSpinner(spinner);
+    spinner.innerHTML = `<a href="${reverticalSheetUrl}" style="text-align: center">Download HB sheet<br>for Place ${chosenPlaceId} </a>`;
+  }
+  else if (reverticalSheetUrl != -1) {
+    spinner.innerHTML = `
+    <div style="width: 100%; display: flex; justify-content: space-between;">
+      <span>Not found.</span>
+      <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
+    </div>
+    <div style="flex-grow: 1; display: grid; place-items: center;">
+     <span>${reverticalSheetUrl}</span>
+    </div>
+    `
+  }
+  else {
+    closeSpinner(spinner);
+  }
+  
+
+
+  async function fetchReverticalSheet(placeId) {
+    let url = DEPLOYMENT_URL + '?' + 'v' + placeId; //Notice the "v" for vertical!
+
+    try {
+      let response = await fetch(url, {method: 'GET'});
+      if (!response.ok) {
+        const message = `An error has occured: ${response.status}`;
+        throw new Error(message);
+      }
+      return await response.text();
+    } 
+    
+    catch(err) {
+      console.log(err);
+      return -1
+    }
+
+  }
+
+}
+
+async function getHorzLink(chosenPlaceId) {
 
   let spinner = appendSpinner();
 
@@ -28,8 +168,19 @@ async function lameify() {
   let placeDetails = await fetchPlaceDetails(chosenPlaceId);
 
   if (placeDetails == -1) {
+    /* 
     closeSpinner(spinner);
     alert(`Place ${chosenPlaceId} not found.`);
+   */
+    spinner.innerHTML = `
+    <div style="width: 100%; display: flex; justify-content: space-between;">
+      <span>Not found.</span>
+      <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
+    </div>
+    <div style="flex-grow: 1; display: grid; place-items: center;">
+     <span>${chosenPlaceId}</span>
+    </div>
+    `
     return
   }
 
@@ -123,7 +274,6 @@ async function lameify() {
       return -1
     }
 
-
   }
   
   async function fetchPlaceDetails(id) {
@@ -189,6 +339,18 @@ function appendSpinner() {
     let wrap = Object.assign(document.createElement('div'), {
       id: 'spinners-wrap',
       style: 'z-index: 3001; min-width: 200px; display: flex; flex-direction: column; gap: 5px; position: fixed; top: 5px; right: 5px; background-color: white; border: 5px solid lightgray; padding: 5px;">',
+      innerHTML: `
+      <button style="
+        margin-right: auto;
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        color: #069;
+        text-decoration: underline;
+        cursor: pointer;
+      "
+      onclick="closeSpinnerAll()"
+      >Close all</button>`
     });
     document.body.append(wrap);
   }
@@ -258,9 +420,13 @@ function appendSpinner() {
 function closeSpinner(element) {
     element.closest('.spinner').remove();
     const wrap = document.getElementById('spinners-wrap');
-    if (wrap.childNodes.length == 0) {
+    if (wrap.children.length <= 1) { // child 1 = Close all button 
         wrap.remove();
     }
+}
+
+function closeSpinnerAll() {
+  document.getElementById('spinners-wrap').remove();
 }
 
 
@@ -463,6 +629,5 @@ function simplifyData(placeDetails, pages) {
     return simple
   
   }
-
 
 
