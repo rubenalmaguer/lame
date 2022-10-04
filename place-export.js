@@ -3,7 +3,8 @@ OPTIONS_FOR_GET = {
   method: 'GET',
   headers: { Authorization: 'Bearer ' + USER_TOKEN, 'content-type': 'application/json' }
 };
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
+//ROLLBACK: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwpJT991dhw3eDgVIlIXFv7Ft5TqdgHswdrRv5Zd98mOtH5Cw4myvxSnPiwtXBkA2gPlg/exec'
 
 
 const LameModal = {
