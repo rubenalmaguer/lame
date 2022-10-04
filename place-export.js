@@ -4,7 +4,8 @@ OPTIONS_FOR_GET = {
   headers: { Authorization: 'Bearer ' + USER_TOKEN, 'content-type': 'application/json' }
 };
 //ROLLBACK: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwpJT991dhw3eDgVIlIXFv7Ft5TqdgHswdrRv5Zd98mOtH5Cw4myvxSnPiwtXBkA2gPlg/exec'
+// RB: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwpJT991dhw3eDgVIlIXFv7Ft5TqdgHswdrRv5Zd98mOtH5Cw4myvxSnPiwtXBkA2gPlg/exec'
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwiWgHb6C2zlYSu0uWg-UzXS89hbW3nxJ6ZeuwaOWh-cDfoVxXgudtuTWOK-skxN_bs8g/exec';
 
 
 const LameModal = {
@@ -128,6 +129,19 @@ async function getVertLink(chosenPlaceId) {
     <a href="${reverticalSheetUrl}" style="text-align: center; margin-bottom:1em">Download HB sheet<br>for Place ${chosenPlaceId}</a>
     </div>
     `;
+  }
+  else if (/^#ERROR/.test(reverticalSheetUrl)) {
+    spinner.innerHTML = `
+    <div style="width: 100%; display: flex; justify-content: space-between;">
+        <span></span>
+        <button onclick="closeSpinner(this)" style="border:0;background-color:transparent;">x</button>
+    </div>
+    <div style="flex-grow: 1; display: grid; place-items: center; color: indianred">
+        <span>Formula error(s) found.</span>
+        <span>Search for <b>"#"</b> in:</span>
+        <a href="${reverticalSheetUrl.slice(6, reverticalSheetUrl.length)}" target="_blank" style="text-decoration:underline; text-align: center; margin-bottom:1em">SOURCE SHEET</a>
+    </div>
+    `
   }
   else if (reverticalSheetUrl != -1) {
     spinner.innerHTML = `
