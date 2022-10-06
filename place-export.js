@@ -38,11 +38,13 @@ const LameModal = {
       open: '',
       style: LameModal.style,
       innerHTML: LameModal.template,
-      onmousedown: (e) => {
-        e.preventDefault();
+      /*
+        onmousedown: (e) => {
+        e.preventDefault(); 
         let input = document.getElementById('lame-input');
         if (document.activeElement != input) input.focus()
       },
+      */ //Why was this even here?
     });
     document.body.append(LameModal.dialog);
   
