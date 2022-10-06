@@ -596,8 +596,10 @@ function simplifyData(placeDetails, pages) {
       "Chinese (Cantonese)(中文(廣東話))": 69
     };
   
-    let targetLangs = placeDetails.place_lang_pair.reduce((prev, curr) => { 
-      return [...prev, flittoLangs[curr.dst_lang_id]]
+    let targetLangs = placeDetails.place_lang_pair.reduce((prev, curr) => {
+      //Flip target and source langs if source is not Korean, don't ask why
+      let tarLangId = (curr.dst_lang_id == placeDetails.place_info.lang_id) ? curr.src_lang_id : curr.dst_lang_id;
+      return [...prev, flittoLangs[tarLangId]]
     }, []);
     targetLangs.sort();
     
@@ -653,5 +655,4 @@ function simplifyData(placeDetails, pages) {
     return simple
   
   }
-
 
