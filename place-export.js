@@ -5,7 +5,7 @@ OPTIONS_FOR_GET = {
 };
 //ROLLBACK: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
 // RB: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwpJT991dhw3eDgVIlIXFv7Ft5TqdgHswdrRv5Zd98mOtH5Cw4myvxSnPiwtXBkA2gPlg/exec'
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwiWgHb6C2zlYSu0uWg-UzXS89hbW3nxJ6ZeuwaOWh-cDfoVxXgudtuTWOK-skxN_bs8g/exec';
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxDED5k-IoaBn0QFqMD5IgmMU_TMCSkQ4nPYamAlVGUTJt0tR3xOZvRB7ja1dw0RIsWmA/exec';
 
 
 const LameModal = {
@@ -21,7 +21,13 @@ const LameModal = {
     </div>
     <div style="padding-top: 2em;max-height: 60vh; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5em">
       <span>Input place IDs separated by commas</span>
+
       <input id="lame-input" autocomplete="off" tabindex="1"></input>
+
+      <label style="align-self: start; display: flex; align-items: center; gap:5px; margin-bottom:0;">
+        <input id="lame-ckbox" type="checkbox">
+        Source only
+      </label>
       
       <div style="padding-top: 1em ;display: flex; justify-content: space-around;">
         <button id="btn-horz" onclick="go(1)" class="btn btn-info" disabled><i _ngcontent-rvc-c130="" class="fa fa-link"></i> Horizontal (HO)</button>
@@ -362,19 +368,22 @@ function appendSpinner() {
   if (!document.getElementById('spinners-wrap')) { 
     let wrap = Object.assign(document.createElement('div'), {
       id: 'spinners-wrap',
-      style: 'z-index: 3001; min-width: 200px; display: flex; flex-direction: column; gap: 5px; position: fixed; top: 5px; right: 5px; background-color: white; border: 5px solid lightgray; padding: 5px;">',
+      style: 'z-index: 3001; min-width: 200px; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; position: fixed; top: 5px; right: 5px; background-color: white; border: 5px solid lightgray; padding: 0 5px 5px 5px;',
       innerHTML: `
-      <button style="
-        margin-right: auto;
-        background: none!important;
-        border: none;
-        padding: 0!important;
-        color: #069;
-        text-decoration: underline;
-        cursor: pointer;
-      "
-      onclick="closeSpinnerAll()"
-      >Close all</button>`
+      <div style="z-index: 3002; position: sticky; top: 0; background-color: white; padding-top: 5px; box-shadow: 0px 15px 10px -10px #fff;">
+        <button style="
+          margin-right: auto;
+          background: none!important;
+          border: none;
+          padding: 0!important;
+          color: #069;
+          text-decoration: underline;
+          cursor: pointer;
+        "
+        onclick="closeSpinnerAll()"
+        >Close all</button>
+      </div>
+      `
     });
     document.body.append(wrap);
   }
@@ -612,6 +621,7 @@ function simplifyData(placeDetails, pages) {
       langs: targetLangs,
     };
   
+    let excludeTranslations = document.querySelector('#lame-ckbox').checked;
     let simplePages = pages.map(p => {
       return {
         pageId: p.item_id,
@@ -628,6 +638,11 @@ function simplifyData(placeDetails, pages) {
               /* 3. Get "id", "source language", and "content" columns */
               let sourceInfo = [seg.item_org_id, flittoLangs[seg.lang_id], seg.content];
   
+              /* NEW: 3.5 Skip sorting translationg is clicked source-only checkbox*/
+              if (excludeTranslations) {
+                return [...prev, sourceInfo];
+              }
+
               /* 4. Get translations sorted alphabetically by target language, by looping through lang ids */
               let sortableTranslations = seg.item_tr;
               let sortedTranslations = sortedLangIds.reduce((prev, currLangId) => {
@@ -655,4 +670,3 @@ function simplifyData(placeDetails, pages) {
     return simple
   
   }
-
