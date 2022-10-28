@@ -5,8 +5,8 @@ OPTIONS_FOR_GET = {
 };
 //ROLLBACK: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
 // RB: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwpJT991dhw3eDgVIlIXFv7Ft5TqdgHswdrRv5Zd98mOtH5Cw4myvxSnPiwtXBkA2gPlg/exec'
-// RB: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxDED5k-IoaBn0QFqMD5IgmMU_TMCSkQ4nPYamAlVGUTJt0tR3xOZvRB7ja1dw0RIsWmA/exec';
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxEcgPvkCRZbS3HFQ-8dc1J5Cq3DzaEL6ai_KiCXj9ZKQ4bUGtzBSdBZWLQMYC5ixd1OA/exec';
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxDED5k-IoaBn0QFqMD5IgmMU_TMCSkQ4nPYamAlVGUTJt0tR3xOZvRB7ja1dw0RIsWmA/exec';
+// NEXT (broken?)DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxEcgPvkCRZbS3HFQ-8dc1J5Cq3DzaEL6ai_KiCXj9ZKQ4bUGtzBSdBZWLQMYC5ixd1OA/exec';
 
 
 const LameModal = {
@@ -14,7 +14,7 @@ const LameModal = {
   template: `
     <div style="display: flex; align-items: end; justify-content: space-between;">
       <a href="https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX" target="_blank" tabindex="-1">
-        <i _ngcontent-rvc-c130="" class="fa fa-external-link"></i> Open HO folder
+        <i _ngcontent-rvc-c130="" class="fa fa-external-link"></i> Open HO folder TEST!!!
       </a>
       <button id="btn-close-lame-modal" type="button" class="btn btn-xs btn-secondary" style="border-radius: 50%; transform: translate(50%);">
         <i class="fa fa-times fa-lg" style="transform: translate(0, -10%);"></i>
