@@ -3,11 +3,8 @@ OPTIONS_FOR_GET = {
   method: 'GET',
   headers: { Authorization: 'Bearer ' + USER_TOKEN, 'content-type': 'application/json' }
 };
-//ROLLBACK: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbymErM-dQUQtjZBzIUPdDk0Pxcv3kkCWpHVPJ1SPBoIY_wG6Naj4LIowy6PH97poPnsEw/exec'
-// RB: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbwpJT991dhw3eDgVIlIXFv7Ft5TqdgHswdrRv5Zd98mOtH5Cw4myvxSnPiwtXBkA2gPlg/exec'
-// Trusty (but place 639 date/time messes up lang id when revert) DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxDED5k-IoaBn0QFqMD5IgmMU_TMCSkQ4nPYamAlVGUTJt0tR3xOZvRB7ja1dw0RIsWmA/exec';
-// NEXT (broken! Formatting col A and B as string breaks vitamin uploading [without error message])DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxEcgPvkCRZbS3HFQ-8dc1J5Cq3DzaEL6ai_KiCXj9ZKQ4bUGtzBSdBZWLQMYC5ixd1OA/exec';
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbyEi8U0CPm1q7XXqYZgdrcpjtbdohvwWG3voACmqenbPJaSuNDlOmNpNg1FgOEyYwfwbA/exec';
+// ROLLBACK (but place 639 date/time messes up lang id when revert) DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxDED5k-IoaBn0QFqMD5IgmMU_TMCSkQ4nPYamAlVGUTJt0tR3xOZvRB7ja1dw0RIsWmA/exec';
+DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzxU0-LzBtFePEPaQNpVFd8cwJEOp8KTIOfJ0rEG-xq4bPJ4wfIr9dN5IWCWV9UXu-Bbw/exec';
 
 
 const LameModal = {
@@ -95,6 +92,7 @@ const LameModal = {
 
 
 function lameify() {
+  console.log('v1.0.0')
   let lameDialog = document.querySelector('#lame-ui');
   if (!lameDialog) {
     LameModal.add();
