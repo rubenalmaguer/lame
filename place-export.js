@@ -4,7 +4,8 @@ OPTIONS_FOR_GET = {
   headers: { Authorization: 'Bearer ' + USER_TOKEN, 'content-type': 'application/json' }
 };
 // ROLLBACK (but place 639 date/time messes up lang id when revert) DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbxDED5k-IoaBn0QFqMD5IgmMU_TMCSkQ4nPYamAlVGUTJt0tR3xOZvRB7ja1dw0RIsWmA/exec';
-DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzxU0-LzBtFePEPaQNpVFd8cwJEOp8KTIOfJ0rEG-xq4bPJ4wfIr9dN5IWCWV9UXu-Bbw/exec';
+// FLITTO: DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzxU0-LzBtFePEPaQNpVFd8cwJEOp8KTIOfJ0rEG-xq4bPJ4wfIr9dN5IWCWV9UXu-Bbw/exec';
+/* PERSONAL */ DEPLOYMENT_URL = 'https://script.google.com/macros/s/AKfycbzPdDppqDKXn7NPZ-bI1mJt5Sbsp4p2aYlRaxiEHCtWJSj-ZFVjOc9tGMDhL1b8R5Wh4w/exec';
 
 
 const LameModal = {
