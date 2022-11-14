@@ -211,7 +211,7 @@ class Spinner {
       preexisting: function (values) {
         return `
           <div style="width: 100%; display: flex; justify-content: end;">
-            <button onclick="Spinner.Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
+            <button onclick="Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
           </div>
           <div style="flex-grow: 1; display: grid; place-items: center; margin-bottom: 1rem;">
           <a class="ho-link" href="${values.sheetUrl}" target="_blank" style="text-decoration:underline;">${values.sheetName}</a>
@@ -234,7 +234,7 @@ class Spinner {
        project: function(projectSheetUrl) {
         return `
           <div style="width: 100%; display: flex; justify-content: end;">
-            <button onclick="Spinner.Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
+            <button onclick="Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
           </div>
           <div style="flex-grow: 1; display: grid; place-items: center; margin-bottom: 1rem;">
           <a class="ho-link" href="${projectSheetUrl}" target="_blank" style="text-decoration:underline;">Your Project</a>
