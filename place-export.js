@@ -187,7 +187,7 @@ class Spinner {
       return `
       <!-- https://loading.io/css/ -->
       <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-      <p class="progress-msg" style="text-align:center">${msg}</p>
+      <p class="progress-msg" style="text-align:center; word-break: break-all;">${msg}</p>
       `
     },
 
@@ -247,9 +247,11 @@ class Spinner {
             <button onclick="Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
           </div>
           <div style="flex-grow: 1; display: grid; place-items: center;">
-            <a href="${values.response}"
-              style="text-align: center;
-              margin-bottom:1em">Download HB sheet<br>for Place ${values.chosenPlaceId}</a>
+            <a href="${values.res}"
+              style="text-align: center;word-break: break-all;
+              margin-bottom:1em">Download HB sheet<br>${(isNaN(values.chosenPlaceId))
+                ? (values.chosenPlaceId)
+                : ' for place ' + values.chosenPlaceId }</a>
           </div>
         `
       },
@@ -286,7 +288,7 @@ class Spinner {
             <span></span>
             <button onclick="Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
         </div>
-        <div style="flex-grow: 1; display: grid; place-items: center; color: indianred">
+        <div style="flex-grow: 1; display: grid; place-items: center; color: indianred; word-break: break-all;">
             <span>Something went wrong</span>
             <span>${(isNaN(values.chosenPlaceId))
               ? values.chosenPlaceId
@@ -313,6 +315,7 @@ class Spinner {
     #spinners-wrap {
       z-index: 3001;
       min-width: 200px;
+      max-width: 300px;
       max-height: 90vh;
       overflow-y: auto;
       display: flex;
