@@ -1,10 +1,10 @@
-IS_FLITTO = true; // else, is personal account - used by LameModal
+IS_FLITTO = false; // else, is personal account - used by LameModal
 PLACES_FOLDER_URL = IS_FLITTO ? 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'
   : 'https://drive.google.com/drive/u/0/folders/1yu1exkolwnzUfAMn4nFBd28y3VEVIZDu' // personal account
 
 USER_TOKEN = localStorage.getItem('access_token');
 DEPLOYMENT_URL = (IS_FLITTO) ? 'https://script.google.com/macros/s/AKfycbyv_zSd9V7WPCm9HCB-ZPsuKiFy6zVCqlntulD8U_n9M75nxZ77FwAmGqyWCo4j12h8LQ/exec'
-  :'https://script.google.com/macros/s/AKfycbzWajzyMjzH_8_KrlszBorxg8Wo6V4TuJipEb5yFSFh15JlGPlo7Y_it3MZNh5wQ48H7g/exec'; //personal account
+  :'https://script.google.com/macros/s/AKfycbxHGLzDRMRboZKa285qRq1sSe5QgYB0mwGm-NjvQX1B8OJGV73nXVX_icrNZydvLZhAAw/exec'; //personal account
 
 
 class LameModal {
@@ -138,12 +138,14 @@ class LameModal {
     let val = LameModal.inputField.value;
     //let rx = /^\d+(\s*,\s*\d+)*\s*$/ /* Digits separated by commas an optional spaces (trailing comma not allowed)*/
     let rxMulti = /^\s*\d{1,6}(\s*,\s*\d{1,6})*\s*,?\s*$/ /* Digits separated by commas an optional spaces */
-    let rxSingle = /^\s*\d{1,6}\s*$/;
+    let rxSingle = /^\s*\d{1,6}\s*$/; // Not used
+    let rxGoogleSheetUrl = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/\S+$/ //Not strict
+
     let isMulti = rxMulti.test(val);
-    let isSingle = rxSingle.test(val);
+    let isGoogleSheetUrl = rxGoogleSheetUrl.test(val);
     
     LameModal.btnHorz.disabled = !isMulti;
-    LameModal.btnVert.disabled = !isMulti; //!isSingle;
+    LameModal.btnVert.disabled = !(isMulti || isGoogleSheetUrl); //!isSingle;
   };
 
   static close() {
@@ -462,6 +464,20 @@ class Spinner {
 function go(isHO) {
 
   let inputStr = LameModal.inputField.value;
+
+  if (isNaN(inputStr[0])) {
+    // Input is URL:
+    const baseUrlLen = 39;
+    const idLen = 44;
+    const id = inputStr.slice(baseUrlLen, baseUrlLen + idLen);
+
+    processProjRevert(id)
+    LameModal.close()  
+    return
+  }
+
+  // Input is IDs:  
+
   let inputArr = inputStr.split(/\s*,\s*/).filter(item => (item));
   let inputSet = new Set(inputArr);
 
@@ -473,6 +489,32 @@ function go(isHO) {
   inputSet.forEach( (id, i) => /* setTimeout( */cb(id)/* , delay * i) */ )
 
 }
+
+
+
+async function processProjRevert(sheetId) {
+  let chosenPlaceId = sheetId; //deconstructed name expected by template
+  let spinner = new Spinner(`Processing for download...<br>(${sheetId})`);
+  try {
+    let res = await fetchGetFromGS('id' + sheetId) // 'id' string used for routing
+    if (/^http/.test(res)) {
+      console.log(res);
+      spinner.setTemplate('hb.success', {chosenPlaceId, res});
+      return
+    }
+    else if (/^#ERROR/.test(res)) {
+      spinner.setTemplate('hb.formulaError', res);
+      return
+    }
+  }
+  catch(err) {
+    console.error(`Error on ${arguments.callee.name} for ${chosenPlaceId}:`, err);
+    spinner.setTemplate('unknownError', {chosenPlaceId, err});
+    return
+  }
+  
+}
+
 
 
 async function processHB(chosenPlaceId) {
