@@ -1,10 +1,15 @@
 IS_FLITTO = false; // else, is personal account - used by LameModal
-PLACES_FOLDER_URL = IS_FLITTO ? 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'
-  : 'https://drive.google.com/drive/u/0/folders/1yu1exkolwnzUfAMn4nFBd28y3VEVIZDu' // personal account
 
 USER_TOKEN = localStorage.getItem('access_token');
+
 DEPLOYMENT_URL = (IS_FLITTO) ? 'https://script.google.com/macros/s/AKfycbyv_zSd9V7WPCm9HCB-ZPsuKiFy6zVCqlntulD8U_n9M75nxZ77FwAmGqyWCo4j12h8LQ/exec'
-  :'https://script.google.com/macros/s/AKfycbxHGLzDRMRboZKa285qRq1sSe5QgYB0mwGm-NjvQX1B8OJGV73nXVX_icrNZydvLZhAAw/exec'; //personal account
+  :'https://script.google.com/macros/s/AKfycbwmfCR2ZihT6WWwAVlq-1scEmfKB4JsMGeRHhguedtc-0zQXHsaoAzv0FIHXJJnFplRJA/exec'; //personal account
+
+PLACES_FOLDER_URL = 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'; // Always Flitto folder
+  /*
+   IS_FLITTO ? 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'
+  : 'https://drive.google.com/drive/u/0/folders/1yu1exkolwnzUfAMn4nFBd28y3VEVIZDu'
+  */ // personal account
 
 
 class LameModal {
