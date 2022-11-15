@@ -439,6 +439,7 @@ class Spinner {
             //On triple click:
             if (!document.querySelectorAll('#spinners-wrap a.ho-link').length) return
             if (confirm('Combine HO sheets into project sheet?')) {
+              window.getSelection().removeAllRanges();
               combineProject()
             }
           }
