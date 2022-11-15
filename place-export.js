@@ -438,8 +438,8 @@ class Spinner {
           || (e.detail === 3 && e.target.id === 'spinners-sticky-header')) {
             //On triple click:
             if (!document.querySelectorAll('#spinners-wrap a.ho-link').length) return
+            window.getSelection().removeAllRanges();
             if (confirm('Combine HO sheets into project sheet?')) {
-              window.getSelection().removeAllRanges();
               combineProject()
             }
           }
