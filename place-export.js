@@ -1,16 +1,16 @@
-IS_FLITTO = false; // else, is personal account - used by LameModal
+DEPLOYMENT_CHOICE = 'personal';
+
+DEPLOYMENTS = {
+  flitto: 'https://script.google.com/macros/s/AKfycbyv_zSd9V7WPCm9HCB-ZPsuKiFy6zVCqlntulD8U_n9M75nxZ77FwAmGqyWCo4j12h8LQ/exec',
+  personal: 'https://script.google.com/macros/s/AKfycbwmfCR2ZihT6WWwAVlq-1scEmfKB4JsMGeRHhguedtc-0zQXHsaoAzv0FIHXJJnFplRJA/exec',
+  flittobot: 'https://script.google.com/macros/s/AKfycbz63F3xWwLj2sxruue4fFdFzGVfFQN4H-r9bvCN-LV2p93MMaTXWcBFKJ877KufKEiz/exec',
+}
+
+DEPLOYMENT_URL = DEPLOYMENTS[DEPLOYMENT_CHOICE]
 
 USER_TOKEN = localStorage.getItem('access_token');
 
-DEPLOYMENT_URL = (IS_FLITTO) ? 'https://script.google.com/macros/s/AKfycbyv_zSd9V7WPCm9HCB-ZPsuKiFy6zVCqlntulD8U_n9M75nxZ77FwAmGqyWCo4j12h8LQ/exec'
-  :'https://script.google.com/macros/s/AKfycbwmfCR2ZihT6WWwAVlq-1scEmfKB4JsMGeRHhguedtc-0zQXHsaoAzv0FIHXJJnFplRJA/exec'; //personal account
-
-PLACES_FOLDER_URL = 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'; // Always Flitto folder
-  /*
-   IS_FLITTO ? 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'
-  : 'https://drive.google.com/drive/u/0/folders/1yu1exkolwnzUfAMn4nFBd28y3VEVIZDu'
-  */ // personal account
-
+PLACES_FOLDER_URL = 'https://drive.google.com/drive/u/1/folders/1F3Bvh5c5isrsDU9JtQ53kIkKHsY6VagX'; // Always Flitto folder (link shown to user by LameModal)
 
 class LameModal {
   static html = `
@@ -941,7 +941,7 @@ function simplifyData(basicPlaceInfo, pages) {
             /* 3. Get "id", "source language", and "content" columns */
             let sourceInfo = [seg.item_org_id, flittoLangs[seg.lang_id], seg.content];
 
-            /* NEW: 3.5 Skip sorting translationg is clicked source-only checkbox*/
+            /* NEW: 3.5 Skip sorting translationg if clicked source-only checkbox*/
             if (excludeTranslations) {
               return [...prev, sourceInfo];
             }
