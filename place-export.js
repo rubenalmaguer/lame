@@ -2,8 +2,8 @@ DEPLOYMENT_CHOICE = 'personal';
 
 DEPLOYMENTS = {
   flitto: 'https://script.google.com/macros/s/AKfycbyv_zSd9V7WPCm9HCB-ZPsuKiFy6zVCqlntulD8U_n9M75nxZ77FwAmGqyWCo4j12h8LQ/exec',
-  personal: 'https://script.google.com/macros/s/AKfycbwmfCR2ZihT6WWwAVlq-1scEmfKB4JsMGeRHhguedtc-0zQXHsaoAzv0FIHXJJnFplRJA/exec',
-  flittobot: 'https://script.google.com/macros/s/AKfycbz63F3xWwLj2sxruue4fFdFzGVfFQN4H-r9bvCN-LV2p93MMaTXWcBFKJ877KufKEiz/exec',
+  personal: 'https://script.google.com/macros/s/AKfycbwmfCR2ZihT6WWwAVlq-1scEmfKB4JsMGeRHhguedtc-0zQXHsaoAzv0FIHXJJnFplRJA/exec', /* outputs to Flitto account*/
+  flittobot: 'https://script.google.com/macros/s/AKfycbz63F3xWwLj2sxruue4fFdFzGVfFQN4H-r9bvCN-LV2p93MMaTXWcBFKJ877KufKEiz/exec', /* outputs to folders in own account, for testing (change in Drive if needed)*/
 }
 
 DEPLOYMENT_URL = DEPLOYMENTS[DEPLOYMENT_CHOICE]
@@ -29,7 +29,7 @@ class LameModal {
       <input id="lame-input" autocomplete="off" tabindex="1"></input>
 
       <label>
-        <input id="lame-ckbox" type="checkbox">
+        <input id="lame-ckbox" type="checkbox" ${(localStorage.lame_srcOnly && JSON.parse(localStorage.lame_srcOnly)) ? 'checked' : ''}>
         Source only
       </label>
       
@@ -124,6 +124,7 @@ class LameModal {
       LameModal.btnClose = LameModal.dialog.querySelector('#lame-ui-close-btn');
       LameModal.btnHorz = LameModal.dialog.querySelector('#btn-horz');
       LameModal.btnVert = LameModal.dialog.querySelector('#btn-vert');
+      LameModal.srcOnlyBox = LameModal.dialog.querySelector('#lame-ckbox');
 
       // Add events
       LameModal.inputField.addEventListener('input', () => LameModal.validateInput());
@@ -478,6 +479,10 @@ class Spinner {
 
 function go(isHO) {
 
+  //save settings
+    localStorage.setItem('lame_srcOnly', JSON.stringify(LameModal.srcOnlyBox.checked));
+  //
+
   let inputStr = LameModal.inputField.value;
 
   if (isNaN(inputStr[0])) {
@@ -486,7 +491,7 @@ function go(isHO) {
     const idLen = 44;
     const id = inputStr.slice(baseUrlLen, baseUrlLen + idLen);
 
-    processProjRevert(id)
+    processProjRevert(id) //Sheet URL of combined project
     LameModal.close()  
     return
   }
@@ -639,7 +644,6 @@ async function processHO(chosenPlaceId) {
   }
 
   // Reshuffle data in preparation to request make sheet
-
   let simplifiedData = simplifyData(basicPlaceInfo, activePages);
   console.log(simplifiedData);
   
@@ -738,9 +742,6 @@ async function combineProject() {
     return
   }
   
-
-
-
   async function requestMergeProject(urlArray) {
     let sData = JSON.stringify(urlArray);
     let options = {
@@ -908,11 +909,21 @@ function simplifyData(basicPlaceInfo, pages) {
     "Chinese (Cantonese)(中文(廣東話))": 69
   };
 
-  let targetLangs = basicPlaceInfo.place_lang_pair.reduce((prev, curr) => {
-    //Flip target and source langs if source is not Korean, don't ask why
-    let tarLangId = (curr.dst_lang_id == basicPlaceInfo.place_info.lang_id) ? curr.src_lang_id : curr.dst_lang_id;
-    return [...prev, flittoLangs[tarLangId]]
-  }, []);
+  /*
+  Get target languages from 1st page, 1st segment
+  DON'T trust laguages set in basic info. 
+  Why not?
+    Place 1 (basic info):
+      lang_id: 30 (matches Japanese image)
+      place_lang_pair: ko(33) → ja(30) //Flipped src/trg
+    
+    Place 873 (basic info):
+      lang_id: 17 (does NOT match Korean image)
+      place_lang_pair: ko(33) → en(17) //Correct pair
+  */
+ 
+  let targetLangs = pages[0].item_org[0].item_tr.map(tr => flittoLangs[tr.lang_id])
+
   targetLangs.sort();
   
   let sortedLangIds = targetLangs.map( lang => flittoLangs[lang] );
@@ -924,7 +935,6 @@ function simplifyData(basicPlaceInfo, pages) {
     langs: targetLangs,
   };
 
-  let excludeTranslations = document.querySelector('#lame-ckbox').checked;
   let simplePages = pages.map(p => {
     return {
       pageId: p.item_id,
@@ -942,7 +952,7 @@ function simplifyData(basicPlaceInfo, pages) {
             let sourceInfo = [seg.item_org_id, flittoLangs[seg.lang_id], seg.content];
 
             /* NEW: 3.5 Skip sorting translationg if clicked source-only checkbox*/
-            if (excludeTranslations) {
+            if (LameModal.srcOnlyBox.checked) {
               return [...prev, sourceInfo];
             }
 
