@@ -288,6 +288,18 @@ class Spinner {
       }
     },
 
+    exception: function(msg = 'Something went wrong') {
+      return `
+          <div style="width: 100%; display: flex; justify-content: space-between;">
+          <span></span>
+          <button onclick="Spinner.close(this)" style="border:0;background-color:transparent;user-select:none;">x</button>
+      </div>
+      <div style="flex-grow: 1; display: grid; place-items: center; color: indianred; word-break: break-all;">
+          <span style="text-align:center; margin-bottom: 1rem;">${msg}</span>
+      </div>
+      `
+    },
+
     unknownError: function (values) {
       return `
         <div style="width: 100%; display: flex; justify-content: space-between;">
@@ -392,16 +404,16 @@ class Spinner {
     }
   `;
 
-  static close = function (element) {
+  static close = function (target) {
     const wrap = document.getElementById('spinners-wrap');
 
-    if (element == 'all') {
+    if (target == 'all') {
       wrap.remove();
       return
     }
 
     else {
-      element.closest('.spinner').remove();
+      target.closest('.spinner').remove();
     
       if (wrap.children.length <= 1) { // child 1 = Close all button 
           wrap.remove();
@@ -631,15 +643,24 @@ async function processHO(chosenPlaceId) {
 
 
   if (!pages.length) {
-    Spinner.close(spinner);
-    alert(`No images found for ${chosenPlaceId}`);
+    spinner.setTemplate('exception', `No images found for <br> place ${chosenPlaceId}.`);
     return
   }
 
   let activePages = pages.filter( p => p.status == 'Y');
+  let placesBaseURL = 'https://a3.flit.to/#/menu-tr/places/'
+
   if (!activePages.length) {
-    Spinner.close(spinner);
-    alert(`Place ${chosenPlaceId} has no active images`);
+    let link = `<a style="color: indianred; text-decoration: underline;"
+    href="${placesBaseURL}${chosenPlaceId}/items">${chosenPlaceId}</a>`;
+    spinner.setTemplate('exception', `Place ${link}<br>has no active images.`);
+    return
+  }
+
+  if (!pages[0].item_org.length) {
+    let link = `<a style="color: indianred; text-decoration: underline;"
+    href="${placesBaseURL}${chosenPlaceId}/items">${chosenPlaceId}</a>`;
+    spinner.setTemplate('exception', `Place ${link}<br>has no translatable text.`);
     return
   }
 
