@@ -1,1 +1,3 @@
-alert('Pulito!')
+function lameify() {
+  alert('Pulito!')
+}
