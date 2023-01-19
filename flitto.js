@@ -5,8 +5,9 @@ function checkLocation() {
   const myLoc = window.location.href;
   if (!myLoc.includes('arcade-service')) return
   
-  if (myLoc === 'https://www.flitto.com/arcade-service/problems/32'
-     || myLoc === 'https://www.flitto.com/arcade-service/problems/193') {
+  if (LAME_OLD_HREF == myLoc
+      || myLoc === 'https://www.flitto.com/arcade-service/problems/32'
+      || myLoc === 'https://www.flitto.com/arcade-service/problems/193') {
     document.querySelector('i.checkbox__icon')?.click();
     document.querySelector('.text-button.primary-light-fill.start-btn')?.click();
     return
@@ -15,6 +16,8 @@ function checkLocation() {
   if (/problems\/\w+\/\w+$/.test(myLoc)) {
       //example:
       //https://www.flitto.com/arcade-service/problems/63c539909f134b08daa48d93/63c539909f134b08daa48d87
+    
+      LAME_OLD_HREF = myLoc;
       
       // Wait for load
       setTimeout(()=>{
