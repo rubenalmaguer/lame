@@ -1,20 +1,20 @@
 LAME_CDN = `https://lame.netlify.com/`;
 LAME_CURRENT_URL = window.location.href;
 LAME_SUPPORTED_SITES = [
-  //Self
+  /* Self */
   {rx: /lame\.netlify\.app/, scriptSrc: `${LAME_CDN}project-page.js`},
   
-  //Flitto
+  /* Flitto */
   {rx: /https:\/\/www\.flitto\.com/, scriptSrc: `${LAME_CDN}flitto.js`},
   
-  //Vitamin
+  /* Vitamin */
   {rx: /a\.flit\.to:4435\/admin#\/admin\/req_tr/, scriptSrc: `${LAME_CDN}crowd-monitoring.js`},
   {rx: /a3\.flit\.to\/#\/arcade\/arcade-objection/, scriptSrc: `${LAME_CDN}arcade-objection.js`},
   {rx: /a3\.flit\.to\/#\/arcade\/arcade-user-history/, scriptSrc: `${LAME_CDN}arcade-history.js`},
   {rx: /a3\.flit\.to\/#\/pro-tr\/pro-applicant\/\d/, scriptSrc: `${LAME_CDN}pro-applicant.js`},
   {rx: /a3\.flit\.to\/#\/menu-tr/, scriptSrc: `${LAME_CDN}place-export.js`},
   
-  //Others
+  /* Others */
   {rx: /api-demo\.flit\.to/, scriptSrc: `${LAME_CDN}extend-simi-sites.js`},
   {rx: /translators\.to/, scriptSrc: `${LAME_CDN}extend-simi-sites.js`},
   {rx: /desertfox\.io.+post/, scriptSrc: `${LAME_CDN}df-multirequest.js`},
