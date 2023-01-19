@@ -1,29 +1,49 @@
 LAME_OLD_HREF = '';
 
-new MutationObserver(mutations => {
-    mutations.forEach(() => {
-      if (LAME_OLD_HREF != winddow.location.href) {
-        LAME_OLD_HREF = window.location.href;
-        lameify();
-      }
-    });
-  })
-.observe(document.querySelector('body'), { childList: true, subtree: true });
 
-
-/*
-LAME_ROUTES = [
-  // New Arcade
-  {rx: /api-demo\.flit\.to/, funcName: `${LAME_CDN}extend-simi-sites.js`},
-  {rx: /translators\.to/, funcName: `${LAME_CDN}extend-simi-sites.js`},
-  {rx: /desertfox\.io.+post/, funcName: `${LAME_CDN}df-multirequest.js`},
+function checkLocation() {
+  const myLoc = window.location.href;
+  if (!myLoc.includes('arcade-service')) return
   
-];
-window['lameify']()
-*/
+  if (myLoc === 'https://www.flitto.com/arcade-service/problems/32'
+     || myLoc === 'https://www.flitto.com/arcade-service/problems/193') {
+    document.querySelector('i.checkbox__icon')?.click();
+    document.querySelector('.text-button.primary-light-fill.start-btn')?.click();
+    return
+  }
+    
+  if (/problems\/\w+\/\w+$/.test(myLoc)) {
+      //example:
+      //https://www.flitto.com/arcade-service/problems/63c539909f134b08daa48d93/63c539909f134b08daa48d87
+      
+      // Wait for load
+      setTimeout(()=>{
+      // Make target div contenteditable, so the spellcheck extension kicks in
+          
+      let targetArea = document.querySelector('p.translation__content');
+      targetArea?.setAttribute('contenteditable','true');
+      targetArea?.focus()
+      
+      // Final accept
+      let acceptBtn = document.querySelector('.accept-button');
+      acceptBtn?.addEventListener('click', ()=>{
+        setTimeout(()=>{
+          sendBtn = document.querySelector('button.primary-light-fill');
+          sendBtn?.click()
+          }, 50);
+      });
+          
+      // For re-reviewing. Remove irrelevant, already accepted translation.
+      document.querySelector('.translation__re-accepted-text').closest('.translation').remove();
+          
+    }, 500);
+      
+  }
+    
+}
 
 
 
 function lameify() {
-  alert('Pulito!')
+  setInterval(checkLocation, 100);
 }
