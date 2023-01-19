@@ -1,4 +1,4 @@
-LAME_OLD_HREF = window.location.href;
+LAME_OLD_HREF = '';
 
 new MutationObserver(mutations => {
     mutations.forEach(() => {
