@@ -22,7 +22,7 @@ function checkLocation() {
   
   // It's a "problem/question" page like https://www.flitto.com/arcade-service/problems/63c539909f134b08daa48d93/63c539909f134b08daa48d87
   if (/problems\/\w+\/\w+$/.test(myLocation)) {
-    LAME_OLD_LOCATION = myLoc;
+    LAME_OLD_LOCATION = myLocation;
     setTimeout(tweakProblemPage, 500);
   } 
 }
