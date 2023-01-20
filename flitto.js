@@ -35,15 +35,12 @@ function bypassTermsAndConditions() {
 function tweakProblemPage() {
   // Make target div contenteditable, so the spellcheck extension kicks in    
   let targetAreas = [...document.querySelectorAll('p.translation__content')];
-  targetAreas?.forEach(area => {
+  
+  targetAreas.forEach((area, i) => {
     area.setAttribute('contenteditable','true');
-    area.focus();
-    setTimeout(()=> {
-      area.blur();
-    }, 0)
-    
+    setTimeout(temporaryFocus(area), i * 100);
   });
-  //targetAreas?.[0].focus();
+  
 
   // Auto-send afer Accept button is clicked
   let acceptButtons = [...document.querySelectorAll('.accept-button')];
@@ -51,6 +48,11 @@ function tweakProblemPage() {
       
   // In case it's a re-review. Remove irrelevant, already accepted translation.
   document.querySelector('.translation__re-accepted-text')?.closest('.translation')?.remove();
+}
+
+function temporaryFocus(area) {
+  area.focus();
+  setTimeout(() => area.blur(), 100)
 }
 
 function clickSend() {
