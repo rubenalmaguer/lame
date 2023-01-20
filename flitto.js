@@ -37,8 +37,8 @@ function tweakProblemPage() {
   let targetAreas = [...document.querySelectorAll('p.translation__content')];
   targetAreas.forEach(area => area.setAttribute('contenteditable','true'));
 
-  // FOcus on areas so spellcheck actually kicks in
-  targetAreas.forEach((area, i) => setTimeout(temporaryFocus(area), i + 1 * 1000));
+  // Focus on areas so spellcheck actually kicks in
+  targetAreas.forEach((area, i) => setTimeout(temporaryFocus(area), i + 1 * 2000));
   
 
   // Auto-send afer Accept button is clicked
