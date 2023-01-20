@@ -38,7 +38,7 @@ function tweakProblemPage() {
   targetAreas.forEach(area => area.setAttribute('contenteditable','true'));
 
   // Focus on areas so spellcheck actually kicks in
-  targetAreas.forEach((area, i) => setTimeout(temporaryFocus(area), i + 1 * 2000));
+  targetAreas.forEach((area, i) => setTimeout(temporaryFocus(area), (i + 1) * 2000));
   
 
   // Auto-send afer Accept button is clicked
