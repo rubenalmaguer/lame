@@ -33,13 +33,12 @@ function bypassTermsAndConditions() {
 }
 
 function tweakProblemPage() {
-  // Make target div contenteditable, so the spellcheck extension kicks in    
+  // Make target div contenteditable, so the spellcheck is available
   let targetAreas = [...document.querySelectorAll('p.translation__content')];
-  
-  targetAreas.forEach((area, i) => {
-    area.setAttribute('contenteditable','true');
-    setTimeout(temporaryFocus(area), i * 1000);
-  });
+  targetAreas.forEach(area => area.setAttribute('contenteditable','true'));
+
+  // FOcus on areas so spellcheck actually kicks in
+  targetAreas.forEach((area, i) => setTimeout(temporaryFocus(area), i + 1 * 1000));
   
 
   // Auto-send afer Accept button is clicked
