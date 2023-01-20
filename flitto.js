@@ -38,6 +38,10 @@ function tweakProblemPage() {
   targetAreas?.forEach(area => {
     area.setAttribute('contenteditable','true');
     area.focus();
+    setTimeout(()=> {
+      area.blur();
+    }, 0)
+    
   });
   //targetAreas?.[0].focus();
 
