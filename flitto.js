@@ -51,7 +51,6 @@ function tweakProblemPage() {
 
 function temporaryFocus(area) {
   area.focus();
-  setTimeout(() => area.blur(), 1000)
 }
 
 function clickSend() {
