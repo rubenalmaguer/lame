@@ -38,7 +38,7 @@ function tweakProblemPage() {
   
   targetAreas.forEach((area, i) => {
     area.setAttribute('contenteditable','true');
-    setTimeout(temporaryFocus(area), i * 100);
+    setTimeout(temporaryFocus(area), i * 1000);
   });
   
 
@@ -52,7 +52,7 @@ function tweakProblemPage() {
 
 function temporaryFocus(area) {
   area.focus();
-  setTimeout(() => area.blur(), 100)
+  setTimeout(() => area.blur(), 1000)
 }
 
 function clickSend() {
