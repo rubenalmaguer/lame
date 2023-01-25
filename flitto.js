@@ -33,24 +33,23 @@ function bypassTermsAndConditions() {
 }
 
 function tweakProblemPage() {
+  // In case it's a re-review. Remove irrelevant, already accepted translation.
+  document.querySelector('.translation__re-accepted-text')?.closest('.translation')?.remove();
+
+  // Auto-send after Accept button is clicked
+  let acceptButtons = [...document.querySelectorAll('.accept-button')];
+  acceptButtons?.forEach(btn => btn.addEventListener('click', clickSend));
+
   // Make target div contenteditable, so the spellcheck is available
   let targetAreas = [...document.querySelectorAll('p.translation__content')];
   targetAreas.forEach(area => area.setAttribute('contenteditable','true'));
 
   // Focus on areas so spellcheck actually kicks in
-  targetAreas.forEach((area, i) => setTimeout(temporaryFocus(area), (i + 1) * 2000));
-  
+  targetAreas.forEach(async (area, i) => {
+    await new Promise(r => setTimeout(r, (i + 1) * 500));
+    area.focus()
+  })
 
-  // Auto-send afer Accept button is clicked
-  let acceptButtons = [...document.querySelectorAll('.accept-button')];
-  acceptButtons?.forEach(btn => btn.addEventListener('click', clickSend));
-      
-  // In case it's a re-review. Remove irrelevant, already accepted translation.
-  document.querySelector('.translation__re-accepted-text')?.closest('.translation')?.remove();
-}
-
-function temporaryFocus(area) {
-  area.focus();
 }
 
 function clickSend() {
