@@ -657,12 +657,16 @@ async function processHO(chosenPlaceId) {
     return
   }
 
+  console.log(pages)
+  
+  /*
   if (!pages[0].item_org.length) {
     let link = `<a style="color: indianred; text-decoration: underline;"
     href="${placesBaseURL}${chosenPlaceId}/items">${chosenPlaceId}</a>`;
     spinner.setTemplate('exception', `Place ${link}<br>has no translatable text.`);
     return
   }
+  */
 
   // Reshuffle data in preparation to request make sheet
   let simplifiedData = simplifyData(basicPlaceInfo, activePages);
