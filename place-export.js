@@ -953,6 +953,8 @@ function simplifyData(basicPlaceInfo, pages) {
   targetLangs = ['Arabic(العربية)', 'Chinese (Simplified)(中文(简体))', 'Chinese (Traditional)(中文(繁體))', 'English(English)', 'Japanese(日本語)', 'Mongolian(монгол)', 'Russian(Русский язык)', 'Vietnamese(Tiếng Việt)']
   //
   
+  console.log(targetLangs)
+  
   targetLangs.sort();
   
   let sortedLangIds = targetLangs.map( lang => flittoLangs[lang] );
