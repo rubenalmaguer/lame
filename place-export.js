@@ -954,7 +954,9 @@ function simplifyData(basicPlaceInfo, pages) {
       lang_id: 17 (does NOT match Korean image)
       place_lang_pair: ko(33) → en(17) //Correct pair
   */
- 
+  
+  let validPage = pages.find(page => page.item_org[0]);
+  if (!validPage) throw Error('All menu pages are empty');
   let targetLangs = pages[0].item_org[0].item_tr.map(tr => flittoLangs[tr.lang_id])
 
   /*
