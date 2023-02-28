@@ -1,4 +1,4 @@
-LAME_CDN = `https://lame.netlify.com/`;
+LAME_CDN = `https://wip--lame.netlify.com/`;
 LAME_CURRENT_URL = window.location.href;
 LAME_SUPPORTED_SITES = [
   /* Self */
