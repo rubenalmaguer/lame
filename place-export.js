@@ -669,8 +669,16 @@ async function processHO(chosenPlaceId) {
   */
 
   // Reshuffle data in preparation to request make sheet
-  let simplifiedData = simplifyData(basicPlaceInfo, activePages);
-  console.log(simplifiedData);
+  let simplifiedData;
+  try {
+    simplifiedData = simplifyData(basicPlaceInfo, activePages);
+    console.log(simplifiedData);
+  }
+  catch(err) {
+    console.error(`Error on ${arguments.callee.name} for ${chosenPlaceId}:`, err);
+    spinner.setTemplate('unknownError', {chosenPlaceId, err});
+    return
+  }
   
   // Request making of new HO sheet -----------------------------------------
   spinner.setMsg('Making spreadsheet...<br>(May take a while)');
@@ -946,8 +954,11 @@ function simplifyData(basicPlaceInfo, pages) {
       lang_id: 17 (does NOT match Korean image)
       place_lang_pair: ko(33) → en(17) //Correct pair
   */
- 
-  let targetLangs = pages[0].item_org[0].item_tr.map(tr => flittoLangs[tr.lang_id])
+  
+  let validPage = pages.find(page => page.item_org[0]);
+  if (!validPage) throw Error('All menu pages are empty');
+
+  let targetLangs = validPage.item_org[0].item_tr.map(tr => flittoLangs[tr.lang_id])
 
   /*
   //QUICK FIX on 230209 for 776
