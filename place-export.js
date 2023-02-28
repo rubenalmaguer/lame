@@ -669,8 +669,16 @@ async function processHO(chosenPlaceId) {
   */
 
   // Reshuffle data in preparation to request make sheet
-  let simplifiedData = simplifyData(basicPlaceInfo, activePages);
-  console.log(simplifiedData);
+  let simplifiedData;
+  try {
+    simplifiedData = simplifyData(basicPlaceInfo, activePages);
+    console.log(simplifiedData);
+  }
+  catch(err) {
+    console.error(`Error on ${arguments.callee.name} for ${chosenPlaceId}:`, err);
+    spinner.setTemplate('unknownError', {chosenPlaceId, err});
+    return
+  }
   
   // Request making of new HO sheet -----------------------------------------
   spinner.setMsg('Making spreadsheet...<br>(May take a while)');
