@@ -957,7 +957,8 @@ function simplifyData(basicPlaceInfo, pages) {
   
   let validPage = pages.find(page => page.item_org[0]);
   if (!validPage) throw Error('All menu pages are empty');
-  let targetLangs = pages[0].item_org[0].item_tr.map(tr => flittoLangs[tr.lang_id])
+
+  let targetLangs = validPage.item_org[0].item_tr.map(tr => flittoLangs[tr.lang_id])
 
   /*
   //QUICK FIX on 230209 for 776
